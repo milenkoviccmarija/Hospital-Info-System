@@ -14,9 +14,27 @@ enum TipTehnickogOsoblja{kuvar,cistacica,domar,tehnicar};
 enum stanjeNalaza{primljen,obradjuje_se,gotov};
 enum TipTesta{BrisIzNosa,BrisIzGrla,TestNaAntitela};
 
+class BrojTelefona{
+
+    protected:
+    char prviDeo[5];
+    char drugiDeo[4];
+    char treciDeo[5];
+
+    public:
+    friend ostream &operator<<(ostream&, const BrojTelefona &);
+    friend istream &operator>>(istream&, BrojTelefona &);
+};
+class Datum{
+protected:
+    int mesec, dan, godina;
+public:
+    Datum(int x,int y,int z);
+    friend ostream& operator<<(ostream& o, const Datum& d);
+};
 class Bolnica {
 
-private:
+public:
 
     string ime;
     string lokacija;
@@ -53,7 +71,7 @@ public:
 };
 class Osoba{
 
-protected:
+public:
 
      string ime;
      string prezime;
@@ -85,7 +103,7 @@ public:
 };
 class Pacijent:public Osoba{
 
-protected:
+public:
 
     KrvnaGrupa grupa;
     bool uput;
@@ -113,7 +131,7 @@ public:
 };
 class Doktor:public Osoba{
 
-protected:
+public:
     int plata;
     string specijalizacija;
     string studije;
@@ -395,7 +413,6 @@ private:
 
 
 };
-
 
 class CentralnaKuhinja{};
 class Veseraj{};

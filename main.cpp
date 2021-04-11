@@ -22,7 +22,7 @@ return i;
 
 int meni1(){
     int m;
-
+    cout<<"0.Unos informacija o bolnici"<<endl;
     cout<<"1.Ispis informacija o bolnici"<<endl;
     cout<<"2.Promena imena bolnice"<<endl;
     cout<<"3.Promena lokacije"<<endl;
@@ -35,11 +35,12 @@ int meni1(){
     do{
     cout<<"Unesite opciju koju zelite:"<<endl;
     cin>>m;
-    }while(m<1 || m>9 );
+    }while(m<0 || m>9 );
     return m;
 }
 int meni2(){
     int m;
+    cout<<"0.Upis informacija o pacijentu"<<endl;
     cout<<"1.Ispis informacija o pacijentu"<<endl;
     cout<<"2.Promena imena"<<endl;
     cout<<"3.Promena prezimena"<<endl;
@@ -54,11 +55,12 @@ int meni2(){
     do{
     cout<<"Unesite opciju koju zelite:"<<endl;
     cin>>m;
-    }while(m<1 || m>11 );
+    }while(m<0 || m>11 );
     return m;
 }
 int meni3(){
     int m;
+    cout<<"0.Unos informacija o doktoru"<<endl;
     cout<<"1.Ispis informacija o doktoru"<<endl;
     cout<<"2.Promena imena"<<endl;
     cout<<"3.Promena prezimena"<<endl;
@@ -72,12 +74,11 @@ int meni3(){
     do{
     cout<<"Unesite opciju koju zelite:"<<endl;
     cin>>m;
-    }while(m<1 || m>10 );
+    }while(m<0 || m>10 );
     return m;
 }
 int main()
 {
-
 cout<<"\n\t\t*******************************************************************************************\n";
 cout<<"\t\t**                                                                                       **\n";
 cout<<"\t\t**                                            		                                 **\n";
@@ -89,6 +90,7 @@ cout<<"\t\t**                                                                   
 cout<<"\t\t**                                                                                       **\n";
 cout<<"\t\t**                                                                                       **\n";
 cout<<"\t\t*******************************************************************************************\n\n\n\n";
+
 Bolnica b;
 Doktor d;
 Pacijent p;
@@ -100,6 +102,55 @@ case 1:
 {
 int m1=meni1();
 switch(m1){
+case 0:
+    {
+        string s1,s2,s3;
+        int i1,i2;
+        int a1,a2;
+        cout<<"Unesite ime:"<<endl;
+        cin>>b.ime;
+        cout<<"Unesite lokaciju:"<<endl;
+        cin>>b.lokacija;
+        cout<<"Unesite kontakt:"<<endl;
+        cin>>b.kontakt;
+        cout<<"Unesite broj kreveta:"<<endl;
+        cin>>b.brojKreveta;
+        cout<<"Unesite broj zauzetih kreveta:"<<endl;
+        cin>>b.brojZautetihKreveta;
+        cout<<"Unesite nacin gradnje(0-paviljonski,1-koridorni,2-blok,3-sistemBaraka,4-tranbantni):"<<endl;
+        cin>>a1;
+        NacinGradnje temp;
+    switch(a1){
+        case 0:
+            b.gradnja= paviljonski;
+            break;
+        case 1:
+            b.gradnja= koridorni;
+            break;
+        case 2:
+            b.gradnja = blok;
+            break;
+        case 3:
+            b.gradnja=sistemBaraka;
+            break;
+        case 4:
+            b.gradnja= tranbantni;
+            break;
+
+    }
+    TipBolnice t;
+        cout<<"Unesite tip bolnice(0-opsta,1-specificna):"<<endl;
+        cin>>a2;
+        switch(a2){
+    case 0:
+        b.tip=opsta;
+        break;
+    case 1:
+        b.tip=specificna;
+        break;
+        }
+break;
+    }
 case 1:
     b.ispis();
     break;
@@ -187,6 +238,72 @@ case 2:
 {
 int m2=meni2();
 switch(m2){
+   case 0:
+    {
+       cout<<"Unesite ime:"<<endl;
+       cin>>p.ime;
+       cout<<"Unesite prezime:"<<endl;
+       cin>>p.prezime;
+       cout<<"Unesite kontakt:"<<endl;
+       cin>>p.kontakt;
+       cout<<"Unesite datum rodjenja:"<<endl;
+       cin>>p.datumRodjenja;
+       cout<<"Unesite datum prijema:"<<endl;
+       cin>>p.datumPrijema;
+       cout<<"Unesite id:"<<endl;
+       cin>>p.id;
+       cout<<"Unesite pol(0-muski,1-zenski):"<<endl;
+       int i,x;
+       cin>>i;
+        switch(i){
+        case 1:
+            p.pol=zenski;
+            break;
+        case 0:
+            p.pol=muski;
+            break;
+      }
+       cout<<"Unesite krvnu grupu(0-Ap,1-An,2-Bp,3-Bn,4-op,5-on,6-ABp,7-ABn):"<<endl;
+       cin>>x;
+        switch(x){
+        case 0:
+            p.grupa= Ap;
+            break;
+        case 1:
+            p.grupa= An;
+            break;
+        case 2:
+            p.grupa= Bp;
+            break;
+        case 3:
+            p.grupa= Bn;
+            break;
+        case 4:
+            p.grupa = ABp;
+            break;
+        case 5:
+            p.grupa= ABn;
+            break;
+        case 6:
+            p.grupa=op;
+            break;
+        case 7:
+            p.grupa= on;
+            break;
+            }
+            cout<<"Da li ima uput(0-false,1-true):"<<endl;
+            int y;
+            cin>>y;
+        switch(y){
+case 0:
+    p.uput=false;
+    break;
+case 1:
+    p.uput=true;
+    break;
+    }
+       break;
+    }
 case 1:
     {
        p.ispisPacijenta();
@@ -310,8 +427,39 @@ case 10:
     break;
 }
 case 3:
+{
     int m3=meni3();
     switch(m3){
+    case 0:
+         {
+       cout<<"Unesite ime:"<<endl;
+       cin>>d.ime;
+       cout<<"Unesite prezime:"<<endl;
+       cin>>d.prezime;
+       cout<<"Unesite kontakt:"<<endl;
+       cin>>d.kontakt;
+       cout<<"Unesite datum rodjenja:"<<endl;
+       cin>>d.datumRodjenja;
+       cout<<"Unesite pol(0-muski,1-zenski):"<<endl;
+       int i,x;
+       cin>>i;
+        switch(i){
+        case 1:
+            d.pol=zenski;
+            break;
+        case 0:
+            d.pol=muski;
+            break;
+             }
+             cout<<"Unesite platu:"<<endl;
+             cin>>d.plata;
+             cout<<"Unesite zavrsene studije:"<<endl;
+             cin>>d.studije;
+             cout<<"Unesite specijalizaciju:"<<endl;
+             cin>>d.specijalizacija;
+            break;
+
+      }
     case 1:
     {
      d.ispisDoktora();
@@ -386,6 +534,8 @@ case 3:
     }
     }
     break;
+
+}
 }
 }while(n!=4);
 

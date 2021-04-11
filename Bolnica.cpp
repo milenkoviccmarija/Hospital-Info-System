@@ -4,8 +4,31 @@
 #include <string.h>
 
 #define MAX 20
-
 using namespace std;
+#include <iomanip>
+ostream& operator<<(ostream& o, const Datum& d){
+    o<< d.mesec << '/' << d.dan << '/' << d.godina;
+    return o;
+}
+Datum::Datum(int x,int y,int z){
+        mesec=x;
+        dan=y;
+        godina=z;
+}
+ostream &operator<<(ostream &output, const BrojTelefona &broj){
+    output << "(" << broj.prviDeo << ")" << broj.drugiDeo << "-" << broj.treciDeo;
+    return output;
+}
+istream &operator>>(istream &input, BrojTelefona &broj){
+    input.ignore();
+    input >> setw(5) >> broj.prviDeo;
+    input.ignore(2);
+    input >> setw(4) >> broj.drugiDeo;
+    input.ignore();
+    input >> setw(5) >> broj.treciDeo;
+    return input;
+
+}
 
 Bolnica::Bolnica(){
 
@@ -586,6 +609,7 @@ Mrtvacnica::Mrtvacnica():p(){
     brojMesta=50;
     brojZauzetihMesta=40;
 
+
 }
 Mrtvacnica::Mrtvacnica(Pacijent p1,int bm,int bsm):p(p1){
     brojMesta=bm;
@@ -1008,7 +1032,7 @@ brojOsobaUintenzivnoj=i;
 brojOsobaUpoluIntenzivnoj=x;
 brojRespiratora=y;
 }
-KovidDeo::KovidDeo(KovidDeo&k)a(k.a){
+KovidDeo::KovidDeo(KovidDeo&k):a(k.a){
 brojOsobaUintenzivnoj=k.brojOsobaUintenzivnoj;
 brojOsobaUpoluIntenzivnoj=k.brojOsobaUpoluIntenzivnoj;
 brojRespiratora=k.brojRespiratora;
@@ -1031,3 +1055,4 @@ return brojOsobaUpoluIntenzivnoj;
 int KovidDeo::getBrojRespiratora()const{
 return brojRespiratora;
 }
+
