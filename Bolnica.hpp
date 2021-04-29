@@ -318,7 +318,7 @@ private:
     Pacijent getPacijenta();
 
 };
-class Mrtvacnica{
+class Mrtvacnica:public Soba{
 
 protected:
     Pacijent p;
@@ -336,10 +336,13 @@ public:
     int getBrojMesta()const;
     int getBrojSlobodnihMesta()const;
     Pacijent getPacijenta();
+    int getPovrsinuSobe() {
+         return (sirina * visina);
+      }
 
 
 };
-class TehnickoOsoblje:Osoba{
+class TehnickoOsoblje:public Osoba{
 protected:
     TipTehnickogOsoblja t;
     int plata;
@@ -605,6 +608,10 @@ protected:
     Osoba apotekar;
     Sestra sestra;
 private:
+    Apoteka();
+    Apoteka(List<string> l,Osoba o,Sestra s);
+    Apoteka(Apoteka& a);
+
     void setApotekar(const Osoba o);
     void setSestru(const Sestra s);
     void setSpisakLekova(List<string> s);
@@ -613,6 +620,8 @@ private:
     Sestra getSestra();
     List<string> getSpisakLekova();
 
+    void ispisSpisakLekova();
+    void ispisApoteke();
 
 };
 

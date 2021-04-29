@@ -949,7 +949,10 @@ string Doktor::getStudije()const{
 return studije;
 }
 void Doktor::setPlata(const int p){
+    if(p>0)
 plata=p;
+else
+    cout<<"Nije uneta validna vrednost!"<<endl;
 }
 void Doktor::setSpecijalizacija(const string sp){
 specijalizacija=sp;
@@ -965,7 +968,6 @@ cout<<"Specijalizacija:"<<specijalizacija<<endl;
 cout<<"Zavrsene studije:"<<studije<<endl;
 
 }
-
 
 Sestra::Sestra(){
     Osoba:Osoba();
@@ -1040,7 +1042,10 @@ void Sestra::setGlavnaSestra(const bool gs){
     GlavnaSestra=gs;
 }
 void Sestra::setPlataSestre(const int pl){
+   if(pl>0)
     plata=pl;
+else
+    cout<<"Nije uneta validna vrednost!"<<endl;
 }
 void Sestra::ispisSestre(){
 Osoba::ispisOsobe();
@@ -1083,7 +1088,6 @@ cout<<"Tip Sestre:"<<temp<<endl;
 cout<<"Da li je glavna sestra:"<<temp2<<endl;
 }
 
-
 Mrtvacnica::Mrtvacnica():p(){
     brojMesta=50;
     brojZauzetihMesta=40;
@@ -1100,10 +1104,16 @@ Mrtvacnica::Mrtvacnica(Mrtvacnica & m):p(m.p){
 
 }
 void Mrtvacnica::setBrojMesta(const int bm){
+if(bm>0)
 brojMesta=bm;
+else
+    cout<<"Nije uneta validna vrednost!"<<endl;
 }
 void Mrtvacnica::setBrojSlobodnihMesta(const int bsm){
+if(bsm>0)
 brojZauzetihMesta=bsm;
+else
+    cout<<"Nije uneta validna vrednost!"<<endl;
 }
 void Mrtvacnica::setPacijena(const Pacijent p1){
 p=p1;
@@ -1117,7 +1127,6 @@ return brojZauzetihMesta;
 Pacijent Mrtvacnica::getPacijenta(){
 return p;
 }
-
 
 TehnickoOsoblje::TehnickoOsoblje(){
 
@@ -1168,7 +1177,10 @@ void TehnickoOsoblje::setTipOsoblja(const TipTehnickogOsoblja to){
 t=to;
 }
 void TehnickoOsoblje::setPlataOdoblja(const int po){
+if(po>0)
 plata=po;
+else
+    cout<<"Nije uneta validna vrednost!"<<endl;
 }
 
 
@@ -1243,7 +1255,10 @@ void PrijemnaAmbulanta::setVitalniZnaci(const bool vz){
 vitalniZnaci=vz;
 }
 void PrijemnaAmbulanta::setBrojMestaUCekaonici(int c){
+if(c>0)
 mestaUcekaonici=c;
+else
+    cout<<"Uneta vrednost nije validna!"<<endl;
 }
 void PrijemnaAmbulanta::setDoktora(const Doktor d1){
 d=d1;
@@ -1693,6 +1708,50 @@ ispisNizVIPMesta();
 cout<<"Broj spratova:"<<brojSpratova<<endl;
 cout<<"Naplata:"<<naplata<<endl;
 
+}
+
+Apoteka::Apoteka():apotekar(),sestra(),spisakLekova(){}
+Apoteka::Apoteka(List<string> l,Osoba o,Sestra s):apotekar(o),sestra(s),spisakLekova(l){}
+Apoteka::Apoteka(Apoteka& a):apotekar(a.apotekar),sestra(a.sestra),spisakLekova(a.spisakLekova){}
+void Apoteka::setApotekar(const Osoba o){
+apotekar=o;
+}
+void Apoteka::setSestru(const Sestra s){
+sestra=s;
+}
+void Apoteka::setSpisakLekova(List<string> s){
+spisakLekova=s;
+}
+Osoba Apoteka::getApotekar(){
+return apotekar;
+}
+Sestra Apoteka::getSestra(){
+return sestra;
+}
+List<string> Apoteka::getSpisakLekova(){
+return spisakLekova;
+}
+void Apoteka::ispisSpisakLekova(){
+if(spisakLekova.size() == 0)
+        {
+            cout<<"------>Nema lekova"<<endl;
+        }
+        else
+        {
+            string d;
+            cout<<"Spisak lekova:"<<endl;
+            cout<<endl;
+            for (int i = 1; i <= spisakLekova.size(); i++)
+            {
+                spisakLekova.read(i, d);
+                cout<<d;
+            }
+        }
+}
+void Apoteka::ispisApoteke(){
+ispisSpisakLekova();
+cout<<sestra;
+cout<<apotekar;
 }
 
 KovidDeo::KovidDeo():a(){
