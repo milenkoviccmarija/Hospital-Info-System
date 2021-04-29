@@ -6,6 +6,7 @@
 #define MAX 20
 using namespace std;
 #include <iomanip>
+
 ostream& operator<<(ostream& o, const Datum& d){
     o<< d.mesec << '/' << d.dan << '/' << d.godina;
     return o;
@@ -15,19 +16,491 @@ Datum::Datum(int x,int y,int z){
         dan=y;
         godina=z;
 }
-ostream &operator<<(ostream &output, const BrojTelefona &broj){
-    output << "(" << broj.prviDeo << ")" << broj.drugiDeo << "-" << broj.treciDeo;
-    return output;
+istream &operator>>(istream&input, Datum &d){
+input>>d.mesec;
+input>>d.dan;
+input>>d.godina;
+return input;
+
 }
-istream &operator>>(istream &input, BrojTelefona &broj){
-    input.ignore();
-    input >> setw(5) >> broj.prviDeo;
-    input.ignore(2);
-    input >> setw(4) >> broj.drugiDeo;
-    input.ignore();
-    input >> setw(5) >> broj.treciDeo;
+
+ostream &operator<<(ostream& output , const Osoba &o){
+
+        output<<"Ime :"<<o.ime<<endl;
+        output<<"Prezime:"<<o.prezime<<endl;
+        output<<"Kontakt:"<<o.kontakt<<endl;
+        output<<"Datum rodjenja:"<<o.datumRodjenja<<endl;
+        string temp;
+    switch(o.pol){
+        case zenski:
+            temp = "zenski";
+            break;
+        case muski:
+            temp = "muski";
+            break;
+            temp = "nedefinisan";
+            break;
+            }
+             output<<"Pol:"<<temp<<endl;
+             return output;
+   }
+istream &operator>>(istream& input, Osoba &o){
+
+       cout<<"Unesite ime:"<<endl;
+       input>>o.ime;
+       cout<<"Unesite prezime:"<<endl;
+       input>>o.prezime;
+       cout<<"Unesite kontakt:"<<endl;
+       input>>o.kontakt;
+       int x2,y2,z2;
+       cout<<"Unesite mesec rodjenja:";
+       input>>x2;
+       cout<<"dan:";
+       input>>y2;
+       cout<<"godinu:";
+       input>>z2;
+       o.setDatumRodjenja(x2,y2,z2);
+    cout<<"Unesite pol(0-muski,1-zenski):"<<endl;
+       int i,x;
+       input>>i;
+        switch(i){
+        case 1:
+            o.pol=zenski;
+            break;
+        case 0:
+            o.pol=muski;
+            break;
+      }
+
     return input;
 
+}
+
+ostream &operator<<(ostream& output, const Bolnica &b){
+
+
+
+        output<<"Ime bolnice:"<<b.ime;
+        output<<"Lokacija:"<<b.lokacija;
+        output<<"Kontakt:"<<b.kontakt;
+        output<<"Broj kreveta:"<<b.brojKreveta;
+        output<<"Broj zauzetih kreveta:"<<b.brojZautetihKreveta;
+        string temp;
+    switch(b.gradnja){
+        case paviljonski:
+            temp = "paviljonski";
+            break;
+        case koridorni:
+            temp = "koridorni";
+            break;
+        case blok:
+            temp = "blok";
+            break;
+        case sistemBaraka:
+            temp = "sistem baraka";
+            break;
+        case tranbantni:
+            temp = "tranbantni";
+            break;
+        default:
+            temp = "nedefinisan";
+            break;
+    }
+        output<<"Nacin gradnje:"<<temp;
+         string tempp;
+    switch(b.tip){
+        case opsta:
+            tempp = "opsta";
+            break;
+        case koridorni:
+            tempp = "specificna";
+            break;
+        default:
+            tempp = "nedefinisan";
+            break;
+    }
+        output<<"Tip bolnice:"<<tempp;
+
+return output;
+
+}
+istream &operator>>(istream& input, Bolnica &b){
+    string s1,s2,s3;
+        int i1,i2;
+        int a1,a2;
+        cout<<"Unesite ime:"<<endl;
+        input>>b.ime;
+        cout<<"Unesite lokaciju:"<<endl;
+        input>>b.lokacija;
+        cout<<"Unesite kontakt:"<<endl;
+        input>>b.kontakt;
+        cout<<"Unesite broj kreveta:"<<endl;
+        input>>b.brojKreveta;
+        cout<<"Unesite broj zauzetih kreveta:"<<endl;
+        input>>b.brojZautetihKreveta;
+        cout<<"Unesite nacin gradnje(0-paviljonski,1-koridorni,2-blok,3-sistemBaraka,4-tranbantni):"<<endl;
+        input>>a1;
+        NacinGradnje temp;
+    switch(a1){
+        case 0:
+            b.gradnja= paviljonski;
+            break;
+        case 1:
+            b.gradnja= koridorni;
+            break;
+        case 2:
+            b.gradnja = blok;
+            break;
+        case 3:
+            b.gradnja=sistemBaraka;
+            break;
+        case 4:
+            b.gradnja= tranbantni;
+            break;
+
+    }
+    TipBolnice t;
+        cout<<"Unesite tip bolnice(0-opsta,1-specificna):"<<endl;
+        input>>a2;
+        switch(a2){
+    case 0:
+        b.tip=opsta;
+        break;
+    case 1:
+        b.tip=specificna;
+        break;
+        }
+        return input;
+
+}
+
+ostream &operator<<(ostream& output, const Pacijent &o){
+
+
+        output<<"Ime :"<<o.ime;
+        output<<"Prezime:"<<o.prezime;
+        output<<"Kontakt:"<<o.kontakt;
+        output<<"Datum rodjenja:"<<o.datumRodjenja;
+        string temp;
+    switch(o.pol){
+        case zenski:
+            temp = "zenski";
+            break;
+        case muski:
+            temp = "muski";
+            break;
+            temp = "nedefinisan";
+            break;
+            }
+             output<<"Pol:"<<temp;
+        string temp3;
+    switch(o.grupa){
+        case Ap:
+            temp3 = "A pozitina";
+            break;
+        case An:
+            temp3 = "A negativna";
+            break;
+            case Bp:
+            temp3 = "B pozitina";
+            break;
+        case Bn:
+            temp3 = "B negativna";
+            break;
+            case ABp:
+            temp3 = "AB pozitina";
+            break;
+        case ABn:
+            temp3 = "AB negativna";
+            break;
+            case op:
+            temp3 = "0 pozitina";
+            break;
+        case on:
+            temp3 = "0 negativna";
+            break;
+            default:
+            temp3 = "nedefinisan";
+            break;
+            }
+            string temp2;
+switch(o.uput){
+case false:
+    temp2="nema uputa";
+    break;
+case true:
+    temp2="ima uput";
+    break;
+default:
+    temp2="nedefinisano";
+}
+
+        output<<"Krvna grupa :"<<temp3;
+        output<<"Uput:"<<temp2;
+        output<<"Datum prijema u bolnicu:"<<o.datumPrijema;
+        output<<"ID pacijenta:"<<o.id;
+        return output;
+}
+istream &operator>>(istream&input, Pacijent &p){
+
+        int x1,y1,z1;
+       cout<<"Unesite ime:"<<endl;
+       input>>p.ime;
+       cout<<"Unesite prezime:"<<endl;
+       input>>p.prezime;
+       cout<<"Unesite kontakt:"<<endl;
+       input>>p.kontakt;
+       int x2,y2,z2;
+       cout<<"Unesite mesec rodjenja:";
+       input>>x2;
+       cout<<"dan:";
+       input>>y2;
+       cout<<"godinu:";
+       input>>z2;
+       p.setDatumRodjenja(x2,y2,z2);
+       cout<<"Unesite mesec prijema:";
+       input>>x1;
+       cout<<"dan:";
+       input>>y1;
+       cout<<"godinu:";
+       input>>z1;
+        p.setDatumPrijemaPacijenta(x1,y1,z1);
+       cout<<"Unesite id:"<<endl;
+       input>>p.id;
+       cout<<"Unesite pol(0-muski,1-zenski):"<<endl;
+       int i,x;
+       input>>i;
+        switch(i){
+        case 1:
+            p.pol=zenski;
+            break;
+        case 0:
+            p.pol=muski;
+            break;
+      }
+       cout<<"Unesite krvnu grupu(0-Ap,1-An,2-Bp,3-Bn,4-op,5-on,6-ABp,7-ABn):"<<endl;
+       input>>x;
+        switch(x){
+        case 0:
+            p.grupa= Ap;
+            break;
+        case 1:
+            p.grupa= An;
+            break;
+        case 2:
+            p.grupa= Bp;
+            break;
+        case 3:
+            p.grupa= Bn;
+            break;
+        case 4:
+            p.grupa = ABp;
+            break;
+        case 5:
+            p.grupa= ABn;
+            break;
+        case 6:
+            p.grupa=op;
+            break;
+        case 7:
+            p.grupa= on;
+            break;
+            }
+            cout<<"Da li ima uput(0-false,1-true):"<<endl;
+            int y;
+            input>>y;
+        switch(y){
+case 0:
+    p.uput=false;
+    break;
+case 1:
+    p.uput=true;
+    break;
+    }
+
+    return input;
+}
+
+ostream &operator<<(ostream&output, const Doktor &d){
+
+        output<<"Ime :"<<d.ime;
+        output<<"Prezime:"<<d.prezime;
+        output<<"Kontakt:"<<d.kontakt;
+        output<<"Datum rodjenja:"<<d.datumRodjenja;
+        string temp;
+    switch(d.pol){
+        case zenski:
+            temp = "zenski";
+            break;
+        case muski:
+            temp = "muski";
+            break;
+            temp = "nedefinisan";
+            break;
+            }
+             output<<"Pol:"<<temp;
+output<<"Plata:"<<d.plata;
+output<<"Specijalizacija:"<<d.specijalizacija;
+output<<"Zavrsene studije:"<<d.studije;
+}
+istream &operator>>(istream& input, Doktor &d){
+
+    cout<<"Unesite ime:";
+       input>>d.ime;
+       cout<<"Unesite prezime:";
+       input>>d.prezime;
+       cout<<"Unesite kontakt:";
+       input>>d.kontakt;
+       int x2,y2,z2;
+       cout<<"Unesite mesec rodjenja:";
+       input>>x2;
+       cout<<"dan:";
+       input>>y2;
+       cout<<"godinu:";
+       input>>z2;
+       d.setDatumRodjenja(x2,y2,z2);
+       cout<<"Unesite pol(0-muski,1-zenski):";
+       int i,x;
+       input>>i;
+        switch(i){
+        case 1:
+            d.pol=zenski;
+            break;
+        case 0:
+            d.pol=muski;
+            break;
+             }
+             cout<<"Unesite platu:";
+             input>>d.plata;
+             cout<<"Unesite zavrsene studije:";
+             input>>d.studije;
+             cout<<"Unesite specijalizaciju:";
+             input>>d.specijalizacija;
+return input;
+}
+
+Soba::Soba(){
+sirina=1;
+visina=1;
+}
+Soba::Soba(int a,int b){
+sirina=a;
+visina=b;
+}
+Soba::Soba(Soba& s){
+sirina=s.sirina;
+visina=s.visina;
+}
+int Soba::getSirinu(){
+return sirina;
+}
+int Soba::getVisinu(){
+return visina;
+}
+void Soba::setSirinu(int i){
+if(i>0)
+sirina=i;
+else
+    cout<<"Nije uneta validna vrednost!"<<endl;
+}
+void Soba::setVisinu(int i){
+if(i>0)
+visina=i;
+else
+    cout<<"Nije uneta validna vrednost!"<<endl;
+
+}
+
+BolnickaSoba::BolnickaSoba(){
+brojLezaja=5;
+}
+BolnickaSoba::BolnickaSoba(int i){
+brojLezaja=i;
+}
+BolnickaSoba::BolnickaSoba(BolnickaSoba &b){
+brojLezaja=b.brojLezaja;
+}
+void BolnickaSoba::setBrojLezaja(int i){
+if(i>0)
+brojLezaja=i;
+else
+    cout<<"Nije uneta validna vrednost!"<<endl;
+}
+void BolnickaSoba::setRastojanje(int i){
+if(i>0)
+    RastojanjeIzmedjuKreveta=i;
+else
+    cout<<"Nije uneta validna vrednost!"<<endl;
+
+}
+int BolnickaSoba::getBrojLezaja(){
+return brojLezaja;
+}
+int BolnickaSoba::getRastojanje(){
+return RastojanjeIzmedjuKreveta;
+}
+
+Toalet::Toalet(){
+visina=1;
+sirina=1;
+brojKabina=1;
+}
+Toalet::Toalet(int i,int a,int b){
+sirina=i;
+visina=a;
+brojKabina=b;
+}
+Toalet::Toalet(Toalet & t){
+sirina=t.sirina;
+visina=t.visina;
+brojKabina=t.brojKabina;
+}
+void Toalet::setBrojKabina(int i){
+if(i>0)
+    brojKabina=i;
+else
+    cout<<"Nije uneta validna vrednost!"<<endl;
+}
+void Toalet::setSirina(int i){
+if(i>0)
+sirina=i;
+else
+    cout<<"Nije uneta validna vrednost!"<<endl;
+}
+void Toalet::setVisina(int i){
+if(i>0)
+visina=i;
+else
+    cout<<"Nije uneta validna vrednost!"<<endl;
+
+}
+int Toalet::getBrojKabina(){
+return brojKabina;
+}
+int Toalet::getSirinu(){
+return sirina;
+}
+int Toalet::getVisina(){
+return visina;
+}
+
+BolnickiToalet::BolnickiToalet(){
+brojInvalidskihPrinceza=1;
+}
+BolnickiToalet::BolnickiToalet(int i){
+    brojInvalidskihPrinceza=i;
+}
+BolnickiToalet::BolnickiToalet(BolnickiToalet & bt){
+brojInvalidskihPrinceza=bt.brojInvalidskihPrinceza;
+}
+void BolnickiToalet::setBrojInvalidskihPrinceza(int i){
+if(i>0)
+brojInvalidskihPrinceza=i;
+else
+    cout<<"Nije uneta validna vrednost!"<<endl;
+}
+int BolnickiToalet::getBrojInvalidskihPrinceza(){
+return brojInvalidskihPrinceza;
 }
 
 Bolnica::Bolnica(){
@@ -128,10 +601,16 @@ void Bolnica::setKontaktBolnice(const string s){
         kontakt=s;
     }
 void Bolnica::setBrojKreveta(const int i){
+        if(i>0)
         brojKreveta=i;
+else
+    cout<<"Nije uneta validna vrednost!"<<endl;
     }
 void Bolnica::setBrojZauzetihKreveta(const int i){
+     if(i>0)
         brojZautetihKreveta=i;
+    else
+    cout<<"Nije uneta validna vrednost!"<<endl;
     }
 void Bolnica::setNacinGradnje(const NacinGradnje i){
         gradnja=i;
@@ -186,31 +665,27 @@ void Bolnica::ispis(){
 
     }
 
-
-Osoba::Osoba(){
+Osoba::Osoba():datumRodjenja(4,11,2021){
 
     ime="Marija";
     prezime="Milenkovic";
     kontakt="0651234567";
-    datumRodjenja="2.1.2005.";
     pol=zenski;
 
  }
-Osoba::Osoba(string ime1, string prezime1, string kon, string DatRodj, Pol p ){
+Osoba::Osoba(string ime1, string prezime1, string kon, Datum DatRodj, Pol p ):datumRodjenja(DatRodj){
 
     ime=ime1;
     prezime=prezime1;
     kontakt=kon;
-    datumRodjenja=DatRodj;
     pol=p;
 
  }
-Osoba::Osoba(const Osoba& o){
+Osoba::Osoba(const Osoba& o):datumRodjenja(o.datumRodjenja){
 
     ime=o.ime;
     prezime=o.prezime;
     kontakt=o.kontakt;
-    datumRodjenja=o.datumRodjenja;
     pol=o.pol;
 
  }
@@ -229,10 +704,8 @@ string Osoba::getKontakt()const{
 return kontakt;
 
 }
-string Osoba::getDatumRodjenja()const{
-
-return datumRodjenja;
-
+Datum Osoba::getDatumRodjenja()const{
+cout<<datumRodjenja;
 }
 string Osoba::getPol()const{
 
@@ -259,8 +732,12 @@ prezime=s;
 void Osoba::setKontakt(const string s){
 kontakt=s;
 }
-void Osoba::setDatumRodjenja(const string s){
-datumRodjenja=s;
+void Osoba::setDatumRodjenja(const int x1,const int y1,const int z1){
+if(x1>0 && y1>0 && z1>0){
+Datum d(x1,y1,z1);
+datumRodjenja=d;
+}else
+cout<<"Nije uneta validna vrednost!"<<endl;
 }
 void Osoba::setPol(const Pol s){
 pol=s;
@@ -288,29 +765,24 @@ void Osoba::ispisOsobe(){
 
     }
 
-
-Pacijent::Pacijent(){
+Pacijent::Pacijent():datumPrijema(1,2,3){
     Osoba:Osoba();
     uput=true;
-    datumPrijema="9.3.2021.";
     id=1;
-
     }
-Pacijent::Pacijent(string ime1, string prezime1, string kon, string DatRodj, Pol p ,KrvnaGrupa krv, bool u,string DatPrijema, int i) {
+Pacijent::Pacijent(string ime1, string prezime1, string kon, Datum DatRodj, Pol p ,KrvnaGrupa krv, bool u,Datum DatPrijema, int i):datumPrijema(DatPrijema) {
 
     Osoba:Osoba(ime1,prezime1,kon,DatRodj,p);
     grupa=krv;
     uput=u;
-    datumPrijema=DatPrijema;
     id=i;
 
 	}
-Pacijent::Pacijent(const Pacijent& p){
+Pacijent::Pacijent(const Pacijent& p):datumPrijema(p.datumPrijema){
 
     Osoba:Osoba((Osoba)p);
     grupa=p.grupa;
     uput=p.uput;
-    datumPrijema=p.datumPrijema;
     id=p.id;
 
 	}
@@ -361,8 +833,8 @@ default:
 }
 return temp;
 }
-string Pacijent::getDatumPrijemaPacijenta()const{
-return datumPrijema;
+Datum Pacijent::getDatumPrijemaPacijenta()const{
+cout<<datumPrijema;
 }
 int Pacijent::getIDPacijenta()const{
     return id;
@@ -377,11 +849,18 @@ void Pacijent::setUput(const bool u){
 uput=u;
 
 }
-void Pacijent::setDatumPrijemaPacijenta(const string s){
-datumPrijema=s;
+void Pacijent::setDatumPrijemaPacijenta(const int x1,const int y1,const int z1){
+if(x1>0 && y1>0 && z1>0){
+Datum d1(x1,y1,z1);
+datumPrijema=d1;
+}else
+cout<<"Nije uneta validna vrednost!"<<endl;
 }
 void Pacijent::setIDPacijenta(const int i){
+if(i>0)
 id=i;
+else
+    cout<<"Nije uneta validna vrednost!"<<endl;
 }
 void Pacijent::ispisPacijenta(){
 
@@ -444,7 +923,7 @@ Doktor::Doktor(){
     studije="Medicinski fakultet Novi Sad";
 
  }
-Doktor::Doktor(string ime1, string prezime1, string kon, string DatRodj, Pol p,int pt, string spc,string stdj){
+Doktor::Doktor(string ime1, string prezime1, string kon, Datum DatRodj, Pol p,int pt, string spc,string stdj){
 
     Osoba:Osoba(ime1,prezime1,kon,DatRodj,p);
     plata=pt;
@@ -496,7 +975,7 @@ Sestra::Sestra(){
 
 
 }
-Sestra::Sestra(string ime1, string prezime1, string kon, string DatRodj, Pol p,tipSestre t, bool gs,int pl){
+Sestra::Sestra(string ime1, string prezime1, string kon, Datum DatRodj, Pol p,tipSestre t, bool gs,int pl){
     Osoba:Osoba(ime1,prezime1,kontakt,datumRodjenja,pol);
     tipS=t;
     GlavnaSestra=gs;
@@ -609,7 +1088,6 @@ Mrtvacnica::Mrtvacnica():p(){
     brojMesta=50;
     brojZauzetihMesta=40;
 
-
 }
 Mrtvacnica::Mrtvacnica(Pacijent p1,int bm,int bsm):p(p1){
     brojMesta=bm;
@@ -627,12 +1105,19 @@ brojMesta=bm;
 void Mrtvacnica::setBrojSlobodnihMesta(const int bsm){
 brojZauzetihMesta=bsm;
 }
+void Mrtvacnica::setPacijena(const Pacijent p1){
+p=p1;
+}
 int Mrtvacnica::getBrojMesta()const{
 return brojMesta;
 }
 int Mrtvacnica::getBrojSlobodnihMesta()const{
 return brojZauzetihMesta;
 }
+Pacijent Mrtvacnica::getPacijenta(){
+return p;
+}
+
 
 TehnickoOsoblje::TehnickoOsoblje(){
 
@@ -641,7 +1126,7 @@ TehnickoOsoblje::TehnickoOsoblje(){
     plata=30000;
 
 }
-TehnickoOsoblje::TehnickoOsoblje(string ime1, string prezime1, string kon, string DatRodj, Pol p,TipTehnickogOsoblja t1,int pl){
+TehnickoOsoblje::TehnickoOsoblje(string ime1, string prezime1, string kon, Datum DatRodj, Pol p,TipTehnickogOsoblja t1,int pl){
     Osoba:Osoba(ime1,prezime1,kon,DatRodj,p);
     t=t1;
     plata=pl;
@@ -729,6 +1214,9 @@ void OdeljenjeZaSnabdevanjeKrvlju::setKrv4(const int a){brojABp=a;}
 void OdeljenjeZaSnabdevanjeKrvlju::setKrv5(const int a){brojABn=a;}
 void OdeljenjeZaSnabdevanjeKrvlju::setKrv6(const int a){brojop=a;}
 void OdeljenjeZaSnabdevanjeKrvlju::setKrv7(const int a){brojon=a;}
+void OdeljenjeZaSnabdevanjeKrvlju::setOsoba(const Osoba o1){
+o=o1;
+}
 int OdeljenjeZaSnabdevanjeKrvlju::getKrv()const{return brojAp;}
 int OdeljenjeZaSnabdevanjeKrvlju::getKrv1()const{return brojAn;}
 int OdeljenjeZaSnabdevanjeKrvlju::getKrv2()const{return brojBp;}
@@ -737,6 +1225,10 @@ int OdeljenjeZaSnabdevanjeKrvlju::getKrv4()const{return brojABp;}
 int OdeljenjeZaSnabdevanjeKrvlju::getKrv5()const{return brojABn;}
 int OdeljenjeZaSnabdevanjeKrvlju::getKrv6()const{return brojop;}
 int OdeljenjeZaSnabdevanjeKrvlju::getKrv7()const{return brojon;}
+Osoba OdeljenjeZaSnabdevanjeKrvlju::getOsoba(){
+return o;
+}
+
 
 PrijemnaAmbulanta::PrijemnaAmbulanta():d(),s(),p(){
     vitalniZnaci=true;
@@ -752,6 +1244,15 @@ vitalniZnaci=vz;
 }
 void PrijemnaAmbulanta::setBrojMestaUCekaonici(int c){
 mestaUcekaonici=c;
+}
+void PrijemnaAmbulanta::setDoktora(const Doktor d1){
+d=d1;
+}
+void PrijemnaAmbulanta::setSestru(const Sestra s1){
+s=s1;
+}
+void PrijemnaAmbulanta::setPacijenta(const Pacijent p1){
+p=p1;
 }
 int PrijemnaAmbulanta::getBrojMestaUcekaonici()const{
 return mestaUcekaonici;
@@ -771,40 +1272,36 @@ default:
 }
 return temp;
 }
+Doktor PrijemnaAmbulanta::getDoktora(){
+return d;
+}
+Sestra PrijemnaAmbulanta::getSestru(){
+return s;
+}
+Pacijent PrijemnaAmbulanta::getPacijenta(){
+return p;
+}
 
-
+/*
 Apoteka::Apoteka():apotekar(),sestra(){
-   char sl[MAX][MAX]={"aspirin","brufen"};
-   int x,y;
-for (int x=0 ; x < MAX; x++)
-{
-  for (int y=0 ; y < MAX; y++)
-  {
-    SpisakLekova[x][y] = sl[x][y];
-  }
 }
-}
-Apoteka::Apoteka(Osoba ap,char sl[MAX][MAX],Sestra s):apotekar(ap),sestra(s){
-int x,y;
-for (int x=0 ; x < MAX; x++)
-{
-  for (int y=0 ; y < MAX; y++)
-  {
-    sl[x][y] = SpisakLekova[x][y];
-  }
-}
+Apoteka::Apoteka(Osoba ap,string s,Sestra s1):apotekar(ap),sestra(s1){
 }
 Apoteka::Apoteka(Apoteka& a):apotekar(a.apotekar),sestra(a.sestra){
-int x,y;
-for (int x=0 ; x < MAX; x++)
-{
-  for (int y=0 ; y < MAX; y++)
-  {
-    a.SpisakLekova[x][y] = SpisakLekova[x][y];
-  }
 }
+void Apoteka::setApotekar(const Osoba o){
+apotekar=o;
 }
-
+void Apoteka::setSestru(const Sestra s){
+sestra=s;
+}
+Osoba Apoteka::getApotekar(){
+return apotekar;
+}
+Sestra Apoteka::getSestra(){
+return sestra;
+}
+*/
 Hitna::Hitna():d(),s(),brojVozila(20),brojKreveta(30){}
 Hitna::Hitna(Doktor d1,Sestra s1,int bv,int bk):d(d1),s(s1),brojVozila(bv),brojKreveta(bk){}
 Hitna::Hitna(Hitna &h):d(h.d),s(h.s),brojVozila(h.brojVozila),brojKreveta(h.brojKreveta){}
@@ -814,19 +1311,30 @@ brojVozila=i;
 void Hitna::setBrojKreveta(const int i){
 brojKreveta=i;
 }
+void Hitna::setDoktora(const Doktor d1){
+d=d1;
+}
+void Hitna::setSestru(const Sestra s1){
+s=s1;
+}
 int Hitna::getBrojVozila()const{
 return brojVozila;
 }
 int Hitna::getBrojKreveta()const{
 return brojKreveta;
 }
-
+Doktor Hitna::getDoktora(){
+return d;
+}
+Sestra Hitna::getSestru(){
+return s;
+}
 
 Laborant::Laborant(){
   Osoba:Osoba();
   plata=70000;
   }
-Laborant::Laborant(string ime1, string prezime1, string kon, string DatRodj, Pol p,int p1){
+Laborant::Laborant(string ime1, string prezime1, string kon, Datum DatRodj, Pol p,int p1){
       Osoba:Osoba(ime1,prezime1, kon, DatRodj, p);
       plata=p1;
 
@@ -867,6 +1375,9 @@ idNalaza=id;
 void Laboratorija::setBrojNezavrsenihNalaza(const int bnn){
 brojNezavrsenihNalaza=bnn;
 }
+void Laboratorija::setLaboranta(const Laborant l1){
+l=l1;
+}
 string Laboratorija::getStanje()const{
 string temp;
 switch(stanjen){
@@ -891,7 +1402,9 @@ return idNalaza;
 int Laboratorija::getBrojNezavrsenihNalaza()const{
 return brojNezavrsenihNalaza;
 }
-
+Laborant Laboratorija::getLaboranta(){
+return l;
+}
 
 KovidAmbulanta::KovidAmbulanta():s(),p(){
 zastita=true;
@@ -916,6 +1429,12 @@ tipTesta=tip;
 }
 void KovidAmbulanta::setBrojNovozarazenih(const int i){
 brojNovoZarazenih=i;
+}
+void KovidAmbulanta::setSestru(const Sestra s1){
+s=s1;
+}
+void KovidAmbulanta::setPacijenta(const Pacijent p1){
+p=p1;
 }
 string KovidAmbulanta::getZastita()const{
 string temp;
@@ -952,74 +1471,228 @@ return temp;
 int KovidAmbulanta::getBrojNovozarazenih()const{
 return brojNovoZarazenih;
 }
-
-Parking::Parking(){
-
-brojMesta=100;
-brojSlobodnihMesta=50;
-brojSpratova=2;
-VIPmesta[0]=1;
-VIPmesta[1]=2;
-VIPmesta[2]=3;
-VIPmesta[3]=4;
-VIPmesta[4]=5;
-naplata=50;
-
+Sestra KovidAmbulanta::getSestru(){
+return s;
 }
-Parking::Parking(int b1,int b2,int b3,int b4[5],int naplata1){
-
-brojMesta=b1;
-brojSlobodnihMesta=b2;
-brojSpratova=b3;
-VIPmesta[0]=b4[0];
-VIPmesta[1]=b4[1];
-VIPmesta[2]=b4[2];
-VIPmesta[3]=b4[3];
-VIPmesta[4]=b4[4];
-naplata=naplata1;
-
+Pacijent KovidAmbulanta::getPacijent(){
+return p;
 }
-Parking::Parking(Parking &p){
 
-brojMesta=p.brojMesta;
-brojSlobodnihMesta=p.brojSlobodnihMesta;
-brojSpratova=p.brojSpratova;
-VIPmesta[0]=p.VIPmesta[0];
-VIPmesta[1]=p.VIPmesta[1];
-VIPmesta[2]=p.VIPmesta[2];
-VIPmesta[3]=p.VIPmesta[3];
-VIPmesta[4]=p.VIPmesta[4];
-naplata=p.naplata;
 
+template <class T>
+ostream& operator<<(ostream& out, const List<T>& rl) {
+	out << endl;
+	out << "--------" << endl;
+	for(int i = 1; i <= rl.size(); i++){
+		if(i != 1) out << ", ";
+		T res;
+		rl.read(i, res);
+		out << res;
+	}
+	out << endl << "--------" << endl;
+	return out;
 }
-void Parking::setBrojMesta(const int b){
-brojMesta=b;
+template <class T>
+List<T>::List(const List<T>& rl) {
+	head = NULL;
+	tail = NULL;
+	noEl = 0;
+
+	for(int i = 1; i <= rl.noEl; i++){
+		T res;
+		if(rl.read(i, res))
+			add(i, res);
+	}
 }
-void Parking::setBrojSlobidnihMesta(const int b){
-brojSlobodnihMesta=b;
+template <class T>
+List<T>& List<T>::operator=(const List<T>& rl) {
+	if(this != &rl) {
+		clear();
+		head = NULL;
+		tail = NULL;
+		noEl = 0;
+
+		for(int i = 1; i <= rl.noEl; i++){
+			T res;
+			if(rl.read(i, res))
+				add(i, res);
+		}
+	}
+	return *this;
+}
+template <class T>
+List<T>::~List() {
+	while(!empty())
+		remove(1);
+}
+template <class T>
+bool List<T>::add(int n, const T& newContent) {
+	if(n < 1 || n > noEl + 1)
+		return false;
+	else {
+		listEl* newEl = new listEl;
+		if(newEl == NULL)
+			return false;
+		else {
+			newEl->content = newContent;
+			if(n == 1) {
+				newEl->next = head;
+				head = newEl;
+			} else if(n == noEl + 1) {
+				newEl->next = NULL;
+				tail->next = newEl;
+			} else {
+				listEl* temp = head;
+				for(int i = 2; i < n; i++)
+					temp = temp->next;
+				newEl->next = temp->next;
+				temp->next = newEl;
+			}
+			noEl++;
+			if(newEl->next == NULL)
+				tail = newEl;
+			return true;
+		}
+	}
+}
+template <class T>
+bool List<T>::remove(int n){
+	if(n < 1 || n > noEl)
+		return false;
+	else {
+		if(n == 1) {
+			listEl* del = head;
+			head = head->next;
+			if(tail == del)
+				tail = NULL;
+			delete del;
+			noEl--;
+		} else {
+			listEl* temp = head;
+			for(int i = 2; i < n; i++)
+				temp = temp->next;
+			listEl* del = temp->next;
+			temp->next = del->next;
+			if(tail == del)
+				tail = temp;
+			delete del;
+			noEl--;
+		}
+		return true;
+	}
+}
+template <class T>
+bool List<T>::read(int n,T& retVal) const {
+	if(n < 1 || n > noEl)
+		return false;
+	else {
+		if(n == 1)
+			retVal = head->content;
+		else if(n == noEl)
+			retVal = tail->content;
+		else {
+			listEl* temp = head;
+			for(int i = 1; i < n; i++)
+				temp = temp->next;
+			retVal = temp->content;
+		}
+		return true;
+	}
+}
+template <class T>
+void List<T>::clear() {
+	while(!empty())
+		remove(1);
+}
+
+void Parking::setnizZauzetihMesta(List<int> l){
+nizZauzetihMesta=l;
+}
+void Parking::setnizSlobodnihMesta(List<int> l){
+nizSlobodnihMesta=l;
 }
 void Parking::setBrojSpratova(const int b){
 brojSpratova=b;
 }
-void Parking::setBrojVIPmesta(const int b[5]){
-   int i;
-    for(i=0;i<5;i++)
-VIPmesta[i]=b[i];
+void Parking::setnizVIPMesta(List<int> l){
+nizVIPmesta=l;
 }
 void Parking::setNaplata(const int b){
 naplata=b;
 }
-int Parking::getBrojMesta()const{
-return brojMesta;
+List<int> Parking::getnizZauzetihMesta()const{
+return nizZauzetihMesta;
 }
-int Parking::getBrojSlobodnihMesta()const{
-return brojSlobodnihMesta;
+List<int> Parking::getnizSlobodnihMesta()const{
+return nizSlobodnihMesta;
 }
 int Parking::getBrojSpratova()const{
 return brojSpratova;
 }
+List<int> Parking::getnizVIPMesta()const{
+return nizVIPmesta;
+}
 int Parking::getnaplata()const{
 return naplata;
+}
+void Parking::ispisNizSlobodnihMesta(){
+        if(nizSlobodnihMesta.size() == 0)
+        {
+            cout<<"------>Nema slobodnih mesta"<<endl;
+        }
+        else
+        {
+            int d;
+            cout<<"Niz slobodnih mesta:"<<endl;
+            cout<<endl;
+            for (int i = 1; i <= nizSlobodnihMesta.size(); i++)
+            {
+                nizSlobodnihMesta.read(i, d);
+                cout<<d;
+            }
+        }
+    }
+void Parking::ispisNizZauzetihMesta(){
+if(nizZauzetihMesta.size() == 0)
+        {
+            cout<<"------>Nema zauzetih mesta"<<endl;
+        }
+        else
+        {
+            int d;
+            cout<<"Niz zauzetih mesta:"<<endl;
+            cout<<endl;
+            for (int i = 1; i <= nizZauzetihMesta.size(); i++)
+            {
+                nizZauzetihMesta.read(i, d);
+                cout<<d;
+            }
+        }
+}
+void Parking::ispisNizVIPMesta(){
+if(nizVIPmesta.size() == 0)
+        {
+            cout<<"------>Nema VIP mesta"<<endl;
+        }
+        else
+        {
+            int d;
+            cout<<"Niz VIP mesta:"<<endl;
+            cout<<endl;
+            for (int i = 1; i <= nizVIPmesta.size(); i++)
+            {
+                nizVIPmesta.read(i, d);
+                cout<<d;
+            }
+        }
+}
+void Parking::ispisParking(){
+ispisNizSlobodnihMesta();
+ispisNizZauzetihMesta();
+ispisNizVIPMesta();
+cout<<"Broj spratova:"<<brojSpratova<<endl;
+cout<<"Naplata:"<<naplata<<endl;
+
 }
 
 KovidDeo::KovidDeo():a(){
@@ -1055,4 +1728,9 @@ return brojOsobaUpoluIntenzivnoj;
 int KovidDeo::getBrojRespiratora()const{
 return brojRespiratora;
 }
-
+void KovidDeo::setKovidAmbulantu(const KovidAmbulanta k){
+a=k;
+}
+KovidAmbulanta KovidDeo::getKovidAmbulantu(){
+return a;
+}

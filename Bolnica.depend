@@ -1,15 +1,15 @@
 # depslib dependency file v1.0
-1618146084 source:c:\users\apokalipsa\documents\bolnica\bolnica.cpp
+1619706580 source:c:\users\apokalipsa\documents\bolnica\bolnica.cpp
 	"Bolnica.hpp"
 	<iostream>
 	<string>
 	<string.h>
 	<iomanip>
 
-1618145101 source:c:\users\apokalipsa\documents\bolnica\main.cpp
+1619459683 source:c:\users\apokalipsa\documents\bolnica\main.cpp
 	<iostream>
 	"Bolnica.hpp"
 
-1618146103 c:\users\apokalipsa\documents\bolnica\bolnica.hpp
+1619706918 c:\users\apokalipsa\documents\bolnica\bolnica.hpp
 	<string>
 

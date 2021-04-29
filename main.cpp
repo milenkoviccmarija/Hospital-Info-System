@@ -1,8 +1,8 @@
 #include <iostream>
-
 using namespace std;
 
 #include "Bolnica.hpp"
+
 
 int meni(){
 
@@ -79,6 +79,7 @@ int meni3(){
 }
 int main()
 {
+
 cout<<"\n\t\t*******************************************************************************************\n";
 cout<<"\t\t**                                                                                       **\n";
 cout<<"\t\t**                                            		                                 **\n";
@@ -246,10 +247,22 @@ switch(m2){
        cin>>p.prezime;
        cout<<"Unesite kontakt:"<<endl;
        cin>>p.kontakt;
-       cout<<"Unesite datum rodjenja:"<<endl;
-       cin>>p.datumRodjenja;
-       cout<<"Unesite datum prijema:"<<endl;
-       cin>>p.datumPrijema;
+       int x2,y2,z2;
+       cout<<"Unesite mesec rodjenja:";
+       cin>>x2;
+       cout<<"dan:";
+       cin>>y2;
+       cout<<"godinu:";
+       cin>>z2;
+       p.setDatumRodjenja(x2,y2,z2);
+       int x1,y1,z1;
+       cout<<"Unesite mesec prijema:";
+       cin>>x1;
+       cout<<"dan:";
+       cin>>y1;
+       cout<<"godinu:";
+       cin>>z1;
+        p.setDatumPrijemaPacijenta(x1,y1,z1);
        cout<<"Unesite id:"<<endl;
        cin>>p.id;
        cout<<"Unesite pol(0-muski,1-zenski):"<<endl;
@@ -335,10 +348,14 @@ case 4:
 }
 case 5:
 {
-       cout<<"Unesite novi datum rodjenja:"<<endl;
-       string s;
-       cin>>s;
-       p.setDatumRodjenja(s);
+       int x2,y2,z2;
+       cout<<"Unesite mesec rodjenja:";
+       cin>>x2;
+       cout<<"dan:";
+       cin>>y2;
+       cout<<"godinu:";
+       cin>>z2;
+       p.setDatumRodjenja(x2,y2,z2);
        break;
 
 }
@@ -404,10 +421,14 @@ case 8:
 }
 case 9:
 {
- cout<<"Unesite datum prijema:"<<endl;
-       string s;
-       cin>>s;
-       p.setDatumPrijemaPacijenta(s);
+        int x1,y1,z1;
+       cout<<"Unesite mesec prijema:";
+       cin>>x1;
+       cout<<"dan:";
+       cin>>y1;
+       cout<<"godinu:";
+       cin>>z1;
+       p.setDatumPrijemaPacijenta(x1,y1,z1);
        break;
 
 }
@@ -438,8 +459,14 @@ case 3:
        cin>>d.prezime;
        cout<<"Unesite kontakt:"<<endl;
        cin>>d.kontakt;
-       cout<<"Unesite datum rodjenja:"<<endl;
-       cin>>d.datumRodjenja;
+       int x2,y2,z2;
+       cout<<"Unesite mesec rodjenja:";
+       cin>>x2;
+       cout<<"dan:";
+       cin>>y2;
+       cout<<"godinu:";
+       cin>>z2;
+       d.setDatumRodjenja(x2,y2,z2);
        cout<<"Unesite pol(0-muski,1-zenski):"<<endl;
        int i,x;
        cin>>i;
@@ -491,10 +518,14 @@ case 3:
     }
     case 5:
     {
-    cout<<"Unesite novi datum rodjenja:"<<endl;
-    string s;
-    cin>>s;
-    d.setDatumRodjenja(s);
+    int x2,y2,z2;
+       cout<<"Unesite mesec rodjenja:";
+       cin>>x2;
+       cout<<"dan:";
+       cin>>y2;
+       cout<<"godinu:";
+       cin>>z2;
+       d.setDatumRodjenja(x2,y2,z2);
     break;
     }
     case 6:

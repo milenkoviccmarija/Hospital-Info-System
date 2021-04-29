@@ -1,3 +1,4 @@
+
 #ifndef BOLNICA_HPP_INCLUDED
 #define BOLNICA_HPP_INCLUDED
 #include <string>
@@ -13,26 +14,130 @@ enum tipSestre{pedijatrijska, medicinska, instrumentarka, ginekolosko_akusarska,
 enum TipTehnickogOsoblja{kuvar,cistacica,domar,tehnicar};
 enum stanjeNalaza{primljen,obradjuje_se,gotov};
 enum TipTesta{BrisIzNosa,BrisIzGrla,TestNaAntitela};
+class Soba{
 
-class BrojTelefona{
+protected:
+    int sirina;
+    int visina;
 
-    protected:
-    char prviDeo[5];
-    char drugiDeo[4];
-    char treciDeo[5];
+public:
+    Soba();
+    Soba(int a,int b);
+    Soba(Soba& s);
 
-    public:
-    friend ostream &operator<<(ostream&, const BrojTelefona &);
-    friend istream &operator>>(istream&, BrojTelefona &);
+    int getSirinu();
+    int getVisinu();
+
+    void setSirinu(int i);
+    void setVisinu(int i);
+
+    virtual int getPovrsinuSobe() = 0;
+    virtual float getMogucihKreveta()=0;
+
+};
+class BolnickaSoba:public Soba{
+
+protected:
+    int brojLezaja;
+    int RastojanjeIzmedjuKreveta;
+public:
+    BolnickaSoba();
+    BolnickaSoba(int i);
+    BolnickaSoba(BolnickaSoba &b);
+
+    void setBrojLezaja(int i);
+    void setRastojanje(int i);
+
+    int getBrojLezaja();
+    int getRastojanje();
+
+      int getPovrsinuSobe() {
+         return (sirina * visina);
+      }
+      float getMogucihKreveta(){
+      int m=getPovrsinuSobe();
+      return m/RastojanjeIzmedjuKreveta;
+      }
+
+};
+class Toalet{
+
+protected:
+    int sirina;
+    int visina;
+    int brojKabina;
+public:
+    Toalet();
+    Toalet(int i,int a,int b);
+    Toalet(Toalet & t);
+
+    void setBrojKabina(int i);
+    void setSirina(int i);
+    void setVisina(int i);
+    int getBrojKabina();
+    int getSirinu();
+    int getVisina();
+
+    virtual int getPovrsinuToaleta() = 0;
+
+
+};
+class BolnickiToalet:public Toalet{
+
+protected:
+    int brojInvalidskihPrinceza;
+public:
+    BolnickiToalet();
+    BolnickiToalet(int i);
+    BolnickiToalet(BolnickiToalet & bt);
+
+    void setBrojInvalidskihPrinceza(int i);
+    int getBrojInvalidskihPrinceza();
+
+     int getPovrsinuToaleta() {
+         return (sirina * visina);
+      }
+
+
 };
 class Datum{
 protected:
-    int mesec, dan, godina;
+    int mesec,dan,godina;
 public:
     Datum(int x,int y,int z);
     friend ostream& operator<<(ostream& o, const Datum& d);
+    friend istream &operator>>(istream&, Datum &d);
+Datum operator++ (int) {
+        Datum d(1,2,3);
+        ++dan;
+        if(dan >31 ) {
+            ++mesec;
+            dan-=30;
+         }
+         ++mesec;
+         if(mesec >12 ) {
+            ++godina;
+            mesec -= 11;
+         }
+         return d;
+      }
+Datum operator--(int ){
+        Datum d(1,2,3);
+        --dan;
+        if(dan<1 ) {
+            --mesec;
+            dan*=30;
+         }
+         --mesec;
+         if(mesec <1 ) {
+            --godina;
+            mesec += 11;
+         }
+         return d;
+      }
+
 };
-class Bolnica {
+class Bolnica{
 
 public:
 
@@ -67,6 +172,13 @@ public:
     void setTipBolnice(const TipBolnice i);
 
     void ispis();
+    friend ostream &operator<<(ostream&, const Bolnica &b);
+    friend istream &operator>>(istream&, Bolnica &b);
+    bool operator==(Bolnica& b)
+{
+return (getNacinGradnje() == b.getNacinGradnje() && getBrojKreveta() == b.getBrojKreveta() && getBrojZauzetihKreveta() == b.getBrojZauzetihKreveta());
+
+}
 
 };
 class Osoba{
@@ -76,29 +188,31 @@ public:
      string ime;
      string prezime;
      string kontakt;
-     string datumRodjenja;
+     Datum datumRodjenja;
      Pol pol;
 
 public:
 
     Osoba();
-	Osoba(string ime1, string prezime1, string kon, string DatRodj, Pol p );
+	Osoba(string ime1, string prezime1, string kon, Datum DatRodj, Pol p );
 	Osoba(const Osoba& o);
 
     string getIme()const;
     string getPrezime()const;
     string getKontakt()const;
-    string getDatumRodjenja()const;
+    Datum getDatumRodjenja()const;
     string getPol()const;
 
     void setIme(const string s);
     void setPrezime(const string s);
     void setKontakt(const string s);
-    void setDatumRodjenja(const string s);
+    void setDatumRodjenja(const int x1,const int y1,const int z1);
     void setPol(const Pol s);
 
 
     void ispisOsobe();
+    friend ostream &operator<<(ostream&, const Osoba &o);
+    friend istream &operator>>(istream&, Osoba &o);
 
 };
 class Pacijent:public Osoba{
@@ -107,27 +221,29 @@ public:
 
     KrvnaGrupa grupa;
     bool uput;
-    string datumPrijema;
+    Datum datumPrijema;
     int id;
 
 public:
 
     Pacijent();
-	Pacijent(string ime1, string prezime1, string kon, string DatRodj, Pol p ,KrvnaGrupa krv, bool u,string DatPrijema, int i);
+	Pacijent(string ime1, string prezime1, string kon, Datum DatRodj, Pol p ,KrvnaGrupa krv, bool u,Datum DatPrijema, int i);
 	Pacijent(const Pacijent& p);
 
     string getKrvnaGrupaPacijenta()const;
     string getUputPacijenta()const;
-    string getDatumPrijemaPacijenta()const;
+    Datum getDatumPrijemaPacijenta()const;
     int getIDPacijenta()const;
 
     void setGrupa(const KrvnaGrupa k);
     void setUput(const bool u);
-    void setDatumPrijemaPacijenta(const string s);
+    void setDatumPrijemaPacijenta(const int x1,const int y1,const int z1);
     void setIDPacijenta(const int i);
 
-
     void ispisPacijenta();
+    friend ostream &operator<<(ostream&, const Pacijent &o);
+    friend istream &operator>>(istream&, Pacijent &p);
+
 };
 class Doktor:public Osoba{
 
@@ -137,7 +253,7 @@ public:
     string studije;
 public:
     Doktor();
-    Doktor(string ime1, string prezime1, string kon, string DatRodj, Pol p,int pt, string spc,string stdj);
+    Doktor(string ime1, string prezime1, string kon, Datum DatRodj, Pol p,int pt, string spc,string stdj);
     Doktor(const Doktor& d);
 
     int getPlata()const;
@@ -149,6 +265,8 @@ public:
     void setStudije(const string stdj);
 
     void ispisDoktora();
+    friend ostream &operator<<(ostream&, const Doktor &d);
+    friend istream &operator>>(istream&, Doktor &d);
 
 };
 class Sestra:public Osoba{
@@ -159,7 +277,7 @@ protected:
     int plata;
 public:
     Sestra();
-    Sestra(string ime1, string prezime1, string kon, string DatRodj, Pol p,tipSestre t, bool gs,int pl);
+    Sestra(string ime1, string prezime1, string kon, Datum DatRodj, Pol p,tipSestre t, bool gs,int pl);
     Sestra(const Sestra& s);
 
     string getTipSestre()const;
@@ -189,9 +307,15 @@ private:
 
     void setVitalniZnaci(const bool vz);
     void setBrojMestaUCekaonici(const int c);
+    void setDoktora(const Doktor d1);
+    void setSestru(const Sestra s1);
+    void setPacijenta(const Pacijent p1);
 
     string getVitalniZnaci()const;
     int getBrojMestaUcekaonici()const;
+    Doktor getDoktora();
+    Sestra getSestru();
+    Pacijent getPacijenta();
 
 };
 class Mrtvacnica{
@@ -207,9 +331,12 @@ public:
 
     void setBrojMesta(const int bm);
     void setBrojSlobodnihMesta(const int bsm);
+    void setPacijena(const Pacijent p1);
 
     int getBrojMesta()const;
     int getBrojSlobodnihMesta()const;
+    Pacijent getPacijenta();
+
 
 };
 class TehnickoOsoblje:Osoba{
@@ -218,7 +345,7 @@ protected:
     int plata;
 public:
     TehnickoOsoblje();
-    TehnickoOsoblje(string ime1, string prezime1, string kon, string DatRodj, Pol p,TipTehnickogOsoblja t1,int pl);
+    TehnickoOsoblje(string ime1, string prezime1, string kon, Datum DatRodj, Pol p,TipTehnickogOsoblja t1,int pl);
     TehnickoOsoblje(TehnickoOsoblje &to);
 
     string getTipOsoblja()const;
@@ -240,6 +367,7 @@ protected:
     int brojABn;
     int brojop;
     int brojon;
+    int ukupno;
     bool nabavka;
 
 public:
@@ -255,6 +383,7 @@ public:
     void setKrv5(const int);
     void setKrv6(const int);
     void setKrv7(const int);
+    void setOsoba(const Osoba o1);
 
     int getKrv()const;
     int getKrv1()const;
@@ -264,9 +393,19 @@ public:
     int getKrv5()const;
     int getKrv6()const;
     int getKrv7()const;
-
-
-
+    Osoba getOsoba();
+OdeljenjeZaSnabdevanjeKrvlju operator+(const OdeljenjeZaSnabdevanjeKrvlju& b) {
+      OdeljenjeZaSnabdevanjeKrvlju o;
+      o.brojAp = this->brojAp + b.brojAp;
+      o.brojAn = this->brojAn + b.brojAn;
+      o.brojBp = this->brojBp + b.brojBp;
+      o.brojBn = this->brojBn + b.brojBn;
+      o.brojABp = this->brojABp + b.brojABp;
+      o.brojABn = this->brojABn + b.brojABn;
+      o.brojop = this->brojop + b.brojop;
+      o.brojon = this->brojon + b.brojon;
+      return o;
+   }
 };
 class Hitna{
 
@@ -282,9 +421,13 @@ public:
 
     void setBrojVozila(const int i);
     void setBrojKreveta(const int i);
+    void setDoktora(const Doktor d1);
+    void setSestru(const Sestra s1);
 
     int getBrojVozila()const;
     int getBrojKreveta()const;
+    Doktor getDoktora();
+    Sestra getSestru();
 
 };
 class Laborant:public Osoba{
@@ -293,7 +436,7 @@ protected:
     int plata;
 public:
     Laborant();
-    Laborant(string ime1, string prezime1, string kon, string DatRodj, Pol p,int p1);
+    Laborant(string ime1, string prezime1, string kon, Datum DatRodj, Pol p,int p1);
     Laborant(Laborant &l);
 
     void setPlata(const int p);
@@ -315,10 +458,13 @@ public:
     void setStanje(const stanjeNalaza n);
     void setIdNalaz(const int id);
     void setBrojNezavrsenihNalaza(const int bnn);
+    void setLaboranta(const Laborant l1);
 
     string getStanje()const;
     int getIdNalaza()const;
     int getBrojNezavrsenihNalaza()const;
+    Laborant getLaboranta();
+
 
 
 };
@@ -338,10 +484,14 @@ public:
     void setZastita(const bool z);
     void setTipTesta(const TipTesta tip);
     void setBrojNovozarazenih(const int i);
+    void setSestru(const Sestra s1);
+    void setPacijenta(const Pacijent p1);
 
     string getZastita()const;
     string getTipSestrea()const;
     int getBrojNovozarazenih()const;
+    Sestra getSestru();
+    Pacijent getPacijent();
 
 };
 class KovidDeo{
@@ -362,65 +512,110 @@ public:
     void setBrojOsoba1(const int i);
     void setBrojOsoba2(const int i);
     void setBrojRespiratora(const int i);
+    void setKovidAmbulantu(const KovidAmbulanta k);
 
     int getBrojOsoba1()const;
     int getBrojOsoba2()const;
     int getBrojRespiratora()const;
+    KovidAmbulanta getKovidAmbulantu();
+    bool operator/(KovidDeo& b)
+{
+        if((b.brojOsobaUintenzivnoj/b.brojRespiratora)!=(this->brojOsobaUintenzivnoj/this->brojRespiratora))
+        return false;
+        else
+            return true;
+
+
+
+}
 
 };
-///Nema geter za broj vip mesta tj.niz, to je ustvari preko statickih promelnjlivih
+template <class T>
+class List{
+	protected:
+		struct listEl{
+			T content;
+			struct listEl* next;
+		};
+		listEl *head;
+		listEl *tail;
+		int noEl;
+
+	public:
+		List(){
+			head=tail=NULL;
+			noEl=0;
+		}
+
+		List(const List<T>&);
+
+		List<T>& operator=(const List<T>&);
+
+		virtual ~List();
+
+		int size() const { return noEl; }
+
+		bool empty() const { return head == NULL ? 1 : 0; }
+
+		bool add(int, const T&);
+
+		bool remove(int);
+
+		bool read(int, T&)const;
+
+		void clear();
+};
 class Parking{
 
 protected:
-    int brojMesta;
-    int brojSlobodnihMesta;
+    List<int> nizZauzetihMesta;
+    List<int> nizSlobodnihMesta;
+    List<int> nizVIPmesta;
     int brojSpratova;
-    int VIPmesta[5];
     int naplata;
 public:
-    Parking();
-    Parking(int b1,int b2,int b3,int b4[5],int naplata1);
-    Parking(Parking &p);
-
-    void setBrojMesta(const int b);
-    void setBrojSlobidnihMesta(const int b);
+    void setnizZauzetihMesta(List<int> l);
+    void setnizSlobodnihMesta(List<int> l);
     void setBrojSpratova(const int b);
-    void setBrojVIPmesta(const int b[5]);
+    void setnizVIPMesta(List<int> l);
     void setNaplata(const int b);
 
-    int getBrojMesta()const;
-    int getBrojSlobodnihMesta()const;
+    List<int> getnizZauzetihMesta()const;
+    List<int> getnizSlobodnihMesta()const;
     int getBrojSpratova()const;
-    int* getBrojVIPMesta()const;
+    List<int> getnizVIPMesta()const;
     int getnaplata()const;
 
+    Parking& operator+=(int i)
+    {
+        nizSlobodnihMesta.add(nizSlobodnihMesta.size()+1, i);
+        return *this;
+    }
+    void ispisNizSlobodnihMesta();
+    void ispisNizZauzetihMesta();
+    void ispisNizVIPMesta();
+    void ispisParking();
+
+
 };
-/// NEMA SETER I GETER ZA SPISAK LEKOVA, APOTEKA JE USTVARI PREKO STATICKIH PROMENLJIVIH
 class Apoteka{
 
 protected:
+    List<string> spisakLekova;
     Osoba apotekar;
-    char SpisakLekova[MAX][MAX];
     Sestra sestra;
 private:
-    Apoteka();
-    Apoteka(Osoba ap,char sl[MAX][MAX],Sestra s);
-    Apoteka(Apoteka& a);
+    void setApotekar(const Osoba o);
+    void setSestru(const Sestra s);
+    void setSpisakLekova(List<string> s);
 
-    void setSpisakLekova(const char[MAX][MAX]);
-
-    char* getSpisakLekova()const;
+    Osoba getApotekar();
+    Sestra getSestra();
+    List<string> getSpisakLekova();
 
 
 };
 
-class CentralnaKuhinja{};
-class Veseraj{};
-class CajnaKuhinja{};
-class DinamickiDeo{};
-class StacionarniDeo{};
-class TehnickiDeo{};
-class MedicinskiFakultet{};
 
 
 
