@@ -1,9 +1,25 @@
 #include <iostream>
 using namespace std;
-
+#include <string>
+#include <string.h>
 #include "Bolnica.hpp"
 
-
+int Gmeni()
+{
+    int izaberiOperaciju;
+    do
+    {
+        cout<<"\nIzaberite zeljenu operaciju:\n";
+        cout<<" 1. Ispitivanje rada svih konstruktora(prazan,sa parametrima,kopije)"<<endl;
+        cout<<" 2. KRAJ RADA PROGRAMA";
+        cout<<"\n>>>";
+        cin>>izaberiOperaciju;
+        if(izaberiOperaciju < 1 || izaberiOperaciju > 2)
+            cout<<"\nOpcija van opsega (1-2)! Izaberite zeljenu operaciju ponovo!\n";
+    }
+    while(izaberiOperaciju < 1 || izaberiOperaciju > 2);
+    return izaberiOperaciju;
+}
 int meni(){
 
 cout<<"\n\t\t\t\t*****************************MENI**********************************\n";
@@ -19,7 +35,6 @@ cin>>i;
 }while(i<1 || i>4);
 return i;
 }
-
 int meni1(){
     int m;
     cout<<"0.Unos informacija o bolnici"<<endl;
@@ -91,7 +106,77 @@ cout<<"\t\t**                                                                   
 cout<<"\t\t**                                                                                       **\n";
 cout<<"\t\t**                                                                                       **\n";
 cout<<"\t\t*******************************************************************************************\n\n\n\n";
-
+///klasa datum
+Datum datum(1,2,2005);
+///klasa Osoba
+Osoba o;
+Osoba o1("Marija","Milenkovic","0651234567",datum,zenski);
+Osoba o2(o);
+///klasa Bolnicka soba
+BolnickaSoba b1;
+BolnickaSoba b2(1,2);
+BolnickaSoba b3(b1);
+///klasa Bolnicki toalet
+BolnickiToalet t1;
+BolnickiToalet t2(1);
+BolnickiToalet t3(t1);
+///klasa Bolnica
+Bolnica bb;
+Bolnica bb1("bb","bb","bb",1,1,paviljonski,opsta);
+Bolnica bb2(bb);
+///klasa Pacijent
+Pacijent pp;
+Pacijent pp1("Marija","Milenkovic","kontakt",datum,zenski,Ap,true,datum,1);
+Pacijent pp2(pp);
+///klasa Doktor
+Doktor dd;
+Doktor dd1("ime","prezime","kontakt",datum,muski,1,"pedijatrija","Medicinski fakultet u Novom Sadu");
+Doktor dd2(dd);
+///klasa Sestra
+Sestra s;
+Sestra s1("ime","prezime","kontakt",datum,muski,ginekolosko_akusarska,true,1);
+Sestra s2(s);
+///klasa Prijemna ambulanta
+PrijemnaAmbulanta a;
+PrijemnaAmbulanta a1(dd,s,pp,true,1);
+PrijemnaAmbulanta a2(a);
+///klasa Tehnicko Osoblje
+TehnickoOsoblje tt;
+TehnickoOsoblje tt1("ime","prezime","kontakt",datum,muski,domar,1);
+TehnickoOsoblje tt2(tt);
+///klasa odeljenje za snabdevanju krvlju
+OdeljenjeZaSnabdevanjeKrvlju oo;
+OdeljenjeZaSnabdevanjeKrvlju oo1(o,1,1,1,1,1,1,1,1);
+OdeljenjeZaSnabdevanjeKrvlju oo2(oo);
+/// klasa Hitna
+Hitna h;
+Hitna h1(dd,s,1,1);
+Hitna h2(h);
+///klasa Laborant
+Laborant l;
+Laborant l1("ime","prezime","kontakt",datum,muski,1);
+Laborant l2(l);
+///klasa Laboratorija
+Laboratorija ll;
+Laboratorija ll1(l,gotov,1,1);
+Laboratorija ll2(ll);
+///klasa Kovid Ambulanta
+KovidAmbulanta ka;
+KovidAmbulanta ka1(s,pp,true,TestNaAntitela,1);
+KovidAmbulanta ka2(ka);
+///klasa Kovid deo
+KovidDeo kd;
+KovidDeo kd1(ka,1,2,3);
+KovidDeo kd2(kd);
+///klasa lista
+List<int> i;
+///klasa parking
+Parking p1;
+Parking p2(i,i,i,1,1);
+Parking p3(p1);
+///klasa Apoteka
+Apoteka ap1;
+Apoteka ap3(ap1);
 
 Bolnica b;
 Doktor d;

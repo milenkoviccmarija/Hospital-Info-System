@@ -42,7 +42,7 @@ protected:
     int RastojanjeIzmedjuKreveta;
 public:
     BolnickaSoba();
-    BolnickaSoba(int i);
+    BolnickaSoba(int i,int a);
     BolnickaSoba(BolnickaSoba &b);
 
     void setBrojLezaja(int i);
@@ -300,7 +300,7 @@ protected:
     bool vitalniZnaci;
     int mestaUcekaonici;
 
-private:
+public:
     PrijemnaAmbulanta();
     PrijemnaAmbulanta(Doktor d1,Sestra s1,Pacijent p1,bool vz,int c);
     PrijemnaAmbulanta(const PrijemnaAmbulanta& pa);
@@ -577,6 +577,11 @@ protected:
     int brojSpratova;
     int naplata;
 public:
+
+    Parking();
+    Parking(List<int> a,List<int> b,List<int> c, int d,int e);
+    Parking(Parking& p);
+
     void setnizZauzetihMesta(List<int> l);
     void setnizSlobodnihMesta(List<int> l);
     void setBrojSpratova(const int b);
@@ -607,7 +612,7 @@ protected:
     List<string> spisakLekova;
     Osoba apotekar;
     Sestra sestra;
-private:
+public:
     Apoteka();
     Apoteka(List<string> l,Osoba o,Sestra s);
     Apoteka(Apoteka& a);
@@ -624,8 +629,4 @@ private:
     void ispisApoteke();
 
 };
-
-
-
-
 #endif // BOLNICA_HPP_INCLUDED

@@ -414,7 +414,7 @@ else
 BolnickaSoba::BolnickaSoba(){
 brojLezaja=5;
 }
-BolnickaSoba::BolnickaSoba(int i){
+BolnickaSoba::BolnickaSoba(int i,int a):RastojanjeIzmedjuKreveta(a){
 brojLezaja=i;
 }
 BolnickaSoba::BolnickaSoba(BolnickaSoba &b){
@@ -1620,6 +1620,12 @@ void List<T>::clear() {
 		remove(1);
 }
 
+Parking::Parking():nizSlobodnihMesta(),nizZauzetihMesta(),nizVIPmesta(){
+    brojSpratova=1;
+    naplata=1;
+}
+Parking::Parking(List<int> a,List<int> b,List<int> c, int d,int e):nizSlobodnihMesta(a),nizZauzetihMesta(b),nizVIPmesta(c),brojSpratova(d),naplata(e){}
+Parking::Parking(Parking& p):nizSlobodnihMesta(p.nizSlobodnihMesta),nizZauzetihMesta(p.nizZauzetihMesta),nizVIPmesta(p.nizVIPmesta),brojSpratova(p.brojSpratova),naplata(p.naplata){}
 void Parking::setnizZauzetihMesta(List<int> l){
 nizZauzetihMesta=l;
 }
