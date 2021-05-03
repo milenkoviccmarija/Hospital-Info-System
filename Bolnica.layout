@@ -4,7 +4,7 @@
 	<ActiveTarget name="Debug" />
 	<File name="Bolnica.hpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="14346" topLine="12" />
+			<Cursor1 position="15012" topLine="34" />
 		</Cursor>
 		<Folding>
 			<Collapse line="16" />
@@ -29,23 +29,12 @@
 			<Collapse line="536" />
 			<Collapse line="570" />
 			<Collapse line="608" />
+			<Collapse line="612" />
 		</Folding>
 	</File>
-	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Bolnica.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="6182" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="7" />
-			<Collapse line="22" />
-			<Collapse line="37" />
-			<Collapse line="55" />
-			<Collapse line="75" />
-		</Folding>
-	</File>
-	<File name="Bolnica.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="45" topLine="0" />
+			<Cursor1 position="40032" topLine="0" />
 		</Cursor>
 		<Folding>
 			<Collapse line="9" />
@@ -68,6 +57,17 @@
 			<Collapse line="405" />
 			<Collapse line="413" />
 			<Collapse line="416" />
+			<Collapse line="419" />
+			<Collapse line="422" />
+			<Collapse line="428" />
+			<Collapse line="435" />
+			<Collapse line="438" />
+			<Collapse line="442" />
+			<Collapse line="447" />
+			<Collapse line="452" />
+			<Collapse line="457" />
+			<Collapse line="463" />
+			<Collapse line="469" />
 			<Collapse line="476" />
 			<Collapse line="479" />
 			<Collapse line="482" />
@@ -218,20 +218,59 @@
 			<Collapse line="1573" />
 			<Collapse line="1599" />
 			<Collapse line="1617" />
-			<Collapse line="1736" />
-			<Collapse line="1739" />
-			<Collapse line="1756" />
-			<Collapse line="1762" />
+			<Collapse line="1622" />
+			<Collapse line="1628" />
+			<Collapse line="1631" />
+			<Collapse line="1634" />
+			<Collapse line="1637" />
+			<Collapse line="1640" />
+			<Collapse line="1643" />
+			<Collapse line="1646" />
+			<Collapse line="1649" />
+			<Collapse line="1652" />
+			<Collapse line="1655" />
+			<Collapse line="1658" />
+			<Collapse line="1675" />
+			<Collapse line="1692" />
+			<Collapse line="1709" />
+			<Collapse line="1718" />
+			<Collapse line="1724" />
+			<Collapse line="1729" />
+			<Collapse line="1735" />
+			<Collapse line="1738" />
+			<Collapse line="1749" />
+			<Collapse line="1752" />
+			<Collapse line="1755" />
+			<Collapse line="1758" />
+			<Collapse line="1761" />
+			<Collapse line="1764" />
 			<Collapse line="1767" />
-			<Collapse line="1772" />
-			<Collapse line="1777" />
-			<Collapse line="1780" />
-			<Collapse line="1783" />
-			<Collapse line="1786" />
-			<Collapse line="1789" />
-			<Collapse line="1792" />
+			<Collapse line="1768" />
+			<Collapse line="1779" />
+			<Collapse line="1785" />
+			<Collapse line="1790" />
 			<Collapse line="1795" />
-			<Collapse line="1798" />
+			<Collapse line="1800" />
+			<Collapse line="1803" />
+			<Collapse line="1806" />
+			<Collapse line="1809" />
+			<Collapse line="1812" />
+			<Collapse line="1815" />
+			<Collapse line="1818" />
+			<Collapse line="1821" />
+		</Folding>
+	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="12265" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="7" />
+			<Collapse line="22" />
+			<Collapse line="37" />
+			<Collapse line="55" />
+			<Collapse line="75" />
+			<Collapse line="95" />
 		</Folding>
 	</File>
 </CodeBlocks_layout_file>

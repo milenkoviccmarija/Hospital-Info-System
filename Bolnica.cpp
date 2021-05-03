@@ -1716,8 +1716,36 @@ cout<<"Naplata:"<<naplata<<endl;
 
 }
 
+Lek::Lek(){
+    jkl=10000000;
+    naziv="aspirin";
+    jedinicnaCena=200;
+    kolicina=200;
+    }
+Lek::Lek(int j,string n,double c, int k):naziv(n){
+    jkl=j;
+    jedinicnaCena=c;
+    kolicina=k;
+    }
+Lek::Lek(Lek& l){
+    jkl=l.jkl;
+    naziv=l.naziv;
+    jedinicnaCena=l.jedinicnaCena;
+    kolicina=l.kolicina;
+    }
+const double Lek::izvracunajVrednostArtikla(){
+    kolicina*jedinicnaCena;
+    }
+ostream& operator<<(ostream& out, const Lek& l) {
+    out<<l.jkl<<endl;
+    out << l.naziv;
+    out<<"Cena:"<<l.jedinicnaCena<<endl;
+    out<<"Kolicina:"<<l.kolicina<<endl;
+    return out;
+}
+
 Apoteka::Apoteka():apotekar(),sestra(),spisakLekova(){}
-Apoteka::Apoteka(List<string> l,Osoba o,Sestra s):apotekar(o),sestra(s),spisakLekova(l){}
+Apoteka::Apoteka(List<Lek*> l,Osoba o,Sestra s):apotekar(o),sestra(s),spisakLekova(l){}
 Apoteka::Apoteka(Apoteka& a):apotekar(a.apotekar),sestra(a.sestra),spisakLekova(a.spisakLekova){}
 void Apoteka::setApotekar(const Osoba o){
 apotekar=o;
@@ -1725,7 +1753,7 @@ apotekar=o;
 void Apoteka::setSestru(const Sestra s){
 sestra=s;
 }
-void Apoteka::setSpisakLekova(List<string> s){
+void Apoteka::setSpisakLekova(List<Lek*> s){
 spisakLekova=s;
 }
 Osoba Apoteka::getApotekar(){
@@ -1734,25 +1762,20 @@ return apotekar;
 Sestra Apoteka::getSestra(){
 return sestra;
 }
-List<string> Apoteka::getSpisakLekova(){
+List<Lek*> Apoteka::getSpisakLekova(){
 return spisakLekova;
 }
 void Apoteka::ispisSpisakLekova(){
-if(spisakLekova.size() == 0)
-        {
-            cout<<"------>Nema lekova"<<endl;
-        }
-        else
-        {
-            string d;
-            cout<<"Spisak lekova:"<<endl;
-            cout<<endl;
-            for (int i = 1; i <= spisakLekova.size(); i++)
-            {
-                spisakLekova.read(i, d);
-                cout<<d;
+        if(spisakLekova.size() == 0) {
+            cout << endl << "Nema lekova." << endl;
+        } else {
+            Lek* o;
+            cout << endl << "Spisak lekova:" << endl;
+            for (int i = 1; i <= spisakLekova.size(); i++){
+                spisakLekova.read(i, o);
+                cout<<o;
             }
-        }
+}
 }
 void Apoteka::ispisApoteke(){
 ispisSpisakLekova();

@@ -606,24 +606,41 @@ public:
 
 
 };
+class Artikal{
+public:
+    virtual double izvracunajVrednostArtikla()const=0;
+};
+class Lek:public Artikal {
+public:
+    int jkl;
+    string naziv;
+    double jedinicnaCena;
+    int kolicina;
+public:
+    Lek();
+    Lek(int j,string n,double c, int k);
+    Lek(Lek& l);
+    const double izvracunajVrednostArtikla();
+    friend ostream& operator<<(ostream& out, const Lek& l);
+};
 class Apoteka{
 
 protected:
-    List<string> spisakLekova;
+    List<Lek*> spisakLekova;
     Osoba apotekar;
     Sestra sestra;
 public:
     Apoteka();
-    Apoteka(List<string> l,Osoba o,Sestra s);
+    Apoteka(List<Lek*> l,Osoba o,Sestra s);
     Apoteka(Apoteka& a);
 
     void setApotekar(const Osoba o);
     void setSestru(const Sestra s);
-    void setSpisakLekova(List<string> s);
+    void setSpisakLekova(List<Lek*> s);
 
     Osoba getApotekar();
     Sestra getSestra();
-    List<string> getSpisakLekova();
+    List<Lek*> getSpisakLekova();
 
     void ispisSpisakLekova();
     void ispisApoteke();

@@ -6,10 +6,12 @@
 	<string.h>
 	<iomanip>
 
-1619808079 source:c:\users\apokalipsa\documents\bolnica\main.cpp
+1619808430 source:c:\users\apokalipsa\documents\bolnica\main.cpp
 	<iostream>
+	<string>
+	<string.h>
 	"Bolnica.hpp"
 
-1619808442 c:\users\apokalipsa\documents\bolnica\bolnica.hpp
+1620064901 c:\users\apokalipsa\documents\bolnica\bolnica.hpp
 	<string>
 
