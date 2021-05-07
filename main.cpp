@@ -4,22 +4,6 @@ using namespace std;
 #include <string.h>
 #include "Bolnica.hpp"
 
-int Gmeni()
-{
-    int izaberiOperaciju;
-    do
-    {
-        cout<<"\nIzaberite zeljenu operaciju:\n";
-        cout<<" 1. Ispitivanje rada svih konstruktora(prazan,sa parametrima,kopije)"<<endl;
-        cout<<" 2. KRAJ RADA PROGRAMA";
-        cout<<"\n>>>";
-        cin>>izaberiOperaciju;
-        if(izaberiOperaciju < 1 || izaberiOperaciju > 2)
-            cout<<"\nOpcija van opsega (1-2)! Izaberite zeljenu operaciju ponovo!\n";
-    }
-    while(izaberiOperaciju < 1 || izaberiOperaciju > 2);
-    return izaberiOperaciju;
-}
 int meni(){
 
 cout<<"\n\t\t\t\t*****************************MENI**********************************\n";
@@ -106,6 +90,7 @@ cout<<"\t\t**                                                                   
 cout<<"\t\t**                                                                                       **\n";
 cout<<"\t\t**                                                                                       **\n";
 cout<<"\t\t*******************************************************************************************\n\n\n\n";
+
 ///klasa datum
 Datum datum(1,2,2005);
 ///klasa Osoba
@@ -113,8 +98,9 @@ Osoba o;
 Osoba o1("Marija","Milenkovic","0651234567",datum,zenski);
 Osoba o2(o);
 ///klasa Bolnicka soba
+List<Pacijent> pa;
 BolnickaSoba b1;
-BolnickaSoba b2(1,2);
+BolnickaSoba b2(1,1,pa);
 BolnickaSoba b3(b1);
 ///klasa Bolnicki toalet
 BolnickiToalet t1;
@@ -177,6 +163,7 @@ Parking p3(p1);
 ///klasa Apoteka
 Apoteka ap1;
 Apoteka ap3(ap1);
+
 
 Bolnica b;
 Doktor d;

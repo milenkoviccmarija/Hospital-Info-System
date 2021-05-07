@@ -1,4 +1,3 @@
-
 #ifndef BOLNICA_HPP_INCLUDED
 #define BOLNICA_HPP_INCLUDED
 #include <string>
@@ -14,6 +13,7 @@ enum tipSestre{pedijatrijska, medicinska, instrumentarka, ginekolosko_akusarska,
 enum TipTehnickogOsoblja{kuvar,cistacica,domar,tehnicar};
 enum stanjeNalaza{primljen,obradjuje_se,gotov};
 enum TipTesta{BrisIzNosa,BrisIzGrla,TestNaAntitela};
+
 class Soba{
 
 protected:
@@ -33,31 +33,6 @@ public:
 
     virtual int getPovrsinuSobe() = 0;
     virtual float getMogucihKreveta()=0;
-
-};
-class BolnickaSoba:public Soba{
-
-protected:
-    int brojLezaja;
-    int RastojanjeIzmedjuKreveta;
-public:
-    BolnickaSoba();
-    BolnickaSoba(int i,int a);
-    BolnickaSoba(BolnickaSoba &b);
-
-    void setBrojLezaja(int i);
-    void setRastojanje(int i);
-
-    int getBrojLezaja();
-    int getRastojanje();
-
-      int getPovrsinuSobe() {
-         return (sirina * visina);
-      }
-      float getMogucihKreveta(){
-      int m=getPovrsinuSobe();
-      return m/RastojanjeIzmedjuKreveta;
-      }
 
 };
 class Toalet{
@@ -620,7 +595,18 @@ public:
     Lek();
     Lek(int j,string n,double c, int k);
     Lek(Lek& l);
-    const double izvracunajVrednostArtikla();
+
+    void setJKl(int jk);
+    void setNaziv(string s);
+    void setJedinicnuCenu(double cena);
+    void setKolicina(int i);
+
+    int getJKL();
+    string getNaziv();
+    double getJedinicnaCena();
+    int getKolicina();
+
+    double izvracunajVrednostArtikla();
     friend ostream& operator<<(ostream& out, const Lek& l);
 };
 class Apoteka{
@@ -644,6 +630,33 @@ public:
 
     void ispisSpisakLekova();
     void ispisApoteke();
+
+};
+class BolnickaSoba:public Soba{
+protected:
+    int brojLezaja;
+    int RastojanjeIzmedjuKreveta;
+    List<Pacijent> spisakPacijenata;
+public:
+    BolnickaSoba();
+    BolnickaSoba(int i,int a,List<Pacijent> p);
+    BolnickaSoba(BolnickaSoba &b);
+
+    void setBrojLezaja(int i);
+    void setRastojanje(int i);
+    void setSpisakPacijenata(List<Pacijent> s);
+
+    int getBrojLezaja();
+    int getRastojanje();
+    List<Pacijent> getSpisakPacijenata();
+
+      int getPovrsinuSobe() {
+         return (sirina * visina);
+      }
+      float getMogucihKreveta(){
+      int m=getPovrsinuSobe();
+      return m/RastojanjeIzmedjuKreveta;
+      }
 
 };
 #endif // BOLNICA_HPP_INCLUDED

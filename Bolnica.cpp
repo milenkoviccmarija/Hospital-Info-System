@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include <string.h>
-
 #define MAX 20
 using namespace std;
 #include <iomanip>
@@ -411,13 +410,13 @@ else
 
 }
 
-BolnickaSoba::BolnickaSoba(){
+BolnickaSoba::BolnickaSoba():spisakPacijenata(){
 brojLezaja=5;
 }
-BolnickaSoba::BolnickaSoba(int i,int a):RastojanjeIzmedjuKreveta(a){
+BolnickaSoba::BolnickaSoba(int i,int a,List<Pacijent> p):RastojanjeIzmedjuKreveta(a),spisakPacijenata(p){
 brojLezaja=i;
 }
-BolnickaSoba::BolnickaSoba(BolnickaSoba &b){
+BolnickaSoba::BolnickaSoba(BolnickaSoba &b):spisakPacijenata(b.spisakPacijenata){
 brojLezaja=b.brojLezaja;
 }
 void BolnickaSoba::setBrojLezaja(int i){
@@ -433,11 +432,17 @@ else
     cout<<"Nije uneta validna vrednost!"<<endl;
 
 }
+void BolnickaSoba::setSpisakPacijenata(List<Pacijent> s){
+spisakPacijenata=s;
+}
 int BolnickaSoba::getBrojLezaja(){
 return brojLezaja;
 }
 int BolnickaSoba::getRastojanje(){
 return RastojanjeIzmedjuKreveta;
+}
+List<Pacijent> BolnickaSoba::getSpisakPacijenata(){
+return spisakPacijenata;
 }
 
 Toalet::Toalet(){
@@ -483,7 +488,6 @@ return sirina;
 int Toalet::getVisina(){
 return visina;
 }
-
 BolnickiToalet::BolnickiToalet(){
 brojInvalidskihPrinceza=1;
 }
@@ -1297,26 +1301,7 @@ Pacijent PrijemnaAmbulanta::getPacijenta(){
 return p;
 }
 
-/*
-Apoteka::Apoteka():apotekar(),sestra(){
-}
-Apoteka::Apoteka(Osoba ap,string s,Sestra s1):apotekar(ap),sestra(s1){
-}
-Apoteka::Apoteka(Apoteka& a):apotekar(a.apotekar),sestra(a.sestra){
-}
-void Apoteka::setApotekar(const Osoba o){
-apotekar=o;
-}
-void Apoteka::setSestru(const Sestra s){
-sestra=s;
-}
-Osoba Apoteka::getApotekar(){
-return apotekar;
-}
-Sestra Apoteka::getSestra(){
-return sestra;
-}
-*/
+
 Hitna::Hitna():d(),s(),brojVozila(20),brojKreveta(30){}
 Hitna::Hitna(Doktor d1,Sestra s1,int bv,int bk):d(d1),s(s1),brojVozila(bv),brojKreveta(bk){}
 Hitna::Hitna(Hitna &h):d(h.d),s(h.s),brojVozila(h.brojVozila),brojKreveta(h.brojKreveta){}
@@ -1733,7 +1718,31 @@ Lek::Lek(Lek& l){
     jedinicnaCena=l.jedinicnaCena;
     kolicina=l.kolicina;
     }
-const double Lek::izvracunajVrednostArtikla(){
+int Lek::getJKL(){
+return jkl;
+}
+string Lek::getNaziv(){
+return naziv;
+}
+double Lek::getJedinicnaCena(){
+return jedinicnaCena;
+}
+int Lek::getKolicina(){
+return kolicina;
+}
+void Lek::setJKl(int jk){
+jkl=jk;
+}
+void Lek::setNaziv(string s){
+naziv=s;
+}
+void Lek::setJedinicnuCenu(double cena){
+jedinicnaCena=cena;
+}
+void Lek::setKolicina(int i){
+kolicina=i;
+}
+double Lek::izvracunajVrednostArtikla(){
     kolicina*jedinicnaCena;
     }
 ostream& operator<<(ostream& out, const Lek& l) {
