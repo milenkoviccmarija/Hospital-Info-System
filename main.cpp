@@ -98,7 +98,7 @@ Osoba o;
 Osoba o1("Marija","Milenkovic","0651234567",datum,zenski);
 Osoba o2(o);
 ///klasa Bolnicka soba
-List<Pacijent> pa;
+List<Pacijent*> pa;
 BolnickaSoba b1;
 BolnickaSoba b2(1,1,pa);
 BolnickaSoba b3(b1);
@@ -152,18 +152,32 @@ KovidAmbulanta ka1(s,pp,true,TestNaAntitela,1);
 KovidAmbulanta ka2(ka);
 ///klasa Kovid deo
 KovidDeo kd;
-KovidDeo kd1(ka,1,2,3);
+List<Pacijent*> sp;
+sp.add(1,&pp);
+KovidDeo kd1(ka,sp,1,1,1);
 KovidDeo kd2(kd);
 ///klasa lista
 List<int> i;
+i.add(1,1);
+i.add(2,2);
+i.add(3,3);
 ///klasa parking
 Parking p1;
 Parking p2(i,i,i,1,1);
 Parking p3(p1);
+//p2.ispisParking();
 ///klasa Apoteka
+List<Lek*> lekici;
 Apoteka ap1;
+Apoteka ap2(lekici,o,s);
 Apoteka ap3(ap1);
-
+///operatori za najcesce aktivnosti
+datum++;
+datum--;
+bool nn=(bb==bb2);
+oo2=oo+oo1;
+bool boo=kd/kd1;
+p1+=5;
 
 Bolnica b;
 Doktor d;

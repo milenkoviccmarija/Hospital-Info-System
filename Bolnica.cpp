@@ -413,7 +413,7 @@ else
 BolnickaSoba::BolnickaSoba():spisakPacijenata(){
 brojLezaja=5;
 }
-BolnickaSoba::BolnickaSoba(int i,int a,List<Pacijent> p):RastojanjeIzmedjuKreveta(a),spisakPacijenata(p){
+BolnickaSoba::BolnickaSoba(int i,int a,List<Pacijent*> p):RastojanjeIzmedjuKreveta(a),spisakPacijenata(p){
 brojLezaja=i;
 }
 BolnickaSoba::BolnickaSoba(BolnickaSoba &b):spisakPacijenata(b.spisakPacijenata){
@@ -432,7 +432,7 @@ else
     cout<<"Nije uneta validna vrednost!"<<endl;
 
 }
-void BolnickaSoba::setSpisakPacijenata(List<Pacijent> s){
+void BolnickaSoba::setSpisakPacijenata(List<Pacijent*> s){
 spisakPacijenata=s;
 }
 int BolnickaSoba::getBrojLezaja(){
@@ -441,7 +441,7 @@ return brojLezaja;
 int BolnickaSoba::getRastojanje(){
 return RastojanjeIzmedjuKreveta;
 }
-List<Pacijent> BolnickaSoba::getSpisakPacijenata(){
+List<Pacijent*> BolnickaSoba::getSpisakPacijenata(){
 return spisakPacijenata;
 }
 
@@ -1097,7 +1097,7 @@ Mrtvacnica::Mrtvacnica():p(){
     brojZauzetihMesta=40;
 
 }
-Mrtvacnica::Mrtvacnica(Pacijent p1,int bm,int bsm):p(p1){
+Mrtvacnica::Mrtvacnica(List<Pacijent*> p1,int bm,int bsm):p(p1){
     brojMesta=bm;
     brojZauzetihMesta=bsm;
 
@@ -1119,7 +1119,7 @@ brojZauzetihMesta=bsm;
 else
     cout<<"Nije uneta validna vrednost!"<<endl;
 }
-void Mrtvacnica::setPacijena(const Pacijent p1){
+void Mrtvacnica::setP(const List<Pacijent*> p1){
 p=p1;
 }
 int Mrtvacnica::getBrojMesta()const{
@@ -1128,7 +1128,7 @@ return brojMesta;
 int Mrtvacnica::getBrojSlobodnihMesta()const{
 return brojZauzetihMesta;
 }
-Pacijent Mrtvacnica::getPacijenta(){
+List<Pacijent*> Mrtvacnica::getP(){
 return p;
 }
 
@@ -1792,17 +1792,17 @@ cout<<sestra;
 cout<<apotekar;
 }
 
-KovidDeo::KovidDeo():a(){
+KovidDeo::KovidDeo():a(),spisak(){
 brojOsobaUintenzivnoj=50;
 brojOsobaUpoluIntenzivnoj=150;
 brojRespiratora=50;
 }
-KovidDeo::KovidDeo(KovidAmbulanta k,int i, int x,int y):a(k){
+KovidDeo::KovidDeo(KovidAmbulanta k,List<Pacijent*> l,int i, int x,int y):a(k),spisak(l){
 brojOsobaUintenzivnoj=i;
 brojOsobaUpoluIntenzivnoj=x;
 brojRespiratora=y;
 }
-KovidDeo::KovidDeo(KovidDeo&k):a(k.a){
+KovidDeo::KovidDeo(KovidDeo&k):a(k.a),spisak(k.spisak){
 brojOsobaUintenzivnoj=k.brojOsobaUintenzivnoj;
 brojOsobaUpoluIntenzivnoj=k.brojOsobaUpoluIntenzivnoj;
 brojRespiratora=k.brojRespiratora;
@@ -1816,6 +1816,9 @@ brojOsobaUpoluIntenzivnoj=i;
 void KovidDeo::setBrojRespiratora(const int i){
 brojRespiratora=i;
 }
+void KovidDeo::setSpisak(List<Pacijent*> p){
+spisak=p;
+}
 int KovidDeo::getBrojOsoba1()const{
 return brojOsobaUintenzivnoj;
 }
@@ -1824,6 +1827,9 @@ return brojOsobaUpoluIntenzivnoj;
 }
 int KovidDeo::getBrojRespiratora()const{
 return brojRespiratora;
+}
+List<Pacijent*> KovidDeo::getSpisak(){
+return spisak;
 }
 void KovidDeo::setKovidAmbulantu(const KovidAmbulanta k){
 a=k;

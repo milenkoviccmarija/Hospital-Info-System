@@ -19,7 +19,6 @@ class Soba{
 protected:
     int sirina;
     int visina;
-
 public:
     Soba();
     Soba(int a,int b);
@@ -54,6 +53,7 @@ public:
     int getVisina();
 
     virtual int getPovrsinuToaleta() = 0;
+    virtual double rastojanjeIzmedjuKabina()=0;
 
 
 };
@@ -71,6 +71,10 @@ public:
 
      int getPovrsinuToaleta() {
          return (sirina * visina);
+      }
+      double rastojanjeIzmedjuKabina(){
+          int p=getPovrsinuToaleta();
+          return p/brojKabina;
       }
 
 
@@ -151,7 +155,7 @@ public:
     friend istream &operator>>(istream&, Bolnica &b);
     bool operator==(Bolnica& b)
 {
-return (getNacinGradnje() == b.getNacinGradnje() && getBrojKreveta() == b.getBrojKreveta() && getBrojZauzetihKreveta() == b.getBrojZauzetihKreveta());
+return (getTipBolnice() ==b.getTipBolnice()&& getNacinGradnje() == b.getNacinGradnje() && getBrojKreveta() == b.getBrojKreveta() && getBrojZauzetihKreveta() == b.getBrojZauzetihKreveta());
 
 }
 
@@ -293,24 +297,59 @@ public:
     Pacijent getPacijenta();
 
 };
+template <class T>
+class List{
+	protected:
+		struct listEl{
+			T content;
+			struct listEl* next;
+		};
+		listEl *head;
+		listEl *tail;
+		int noEl;
+
+	public:
+		List(){
+			head=tail=NULL;
+			noEl=0;
+		}
+
+		List(const List<T>&);
+
+		List<T>& operator=(const List<T>&);
+
+		virtual ~List();
+
+		int size() const { return noEl; }
+
+		bool empty() const { return head == NULL ? 1 : 0; }
+
+		bool add(int, const T&);
+
+		bool remove(int);
+
+		bool read(int, T&)const;
+
+		void clear();
+};
 class Mrtvacnica:public Soba{
 
 protected:
-    Pacijent p;
+    List<Pacijent*> p;
     int brojMesta;
     int brojZauzetihMesta;
 public:
     Mrtvacnica();
-    Mrtvacnica(Pacijent p1,int bm,int bsm);
+    Mrtvacnica(List<Pacijent*> p1,int bm,int bsm);
     Mrtvacnica(Mrtvacnica & m);
 
     void setBrojMesta(const int bm);
     void setBrojSlobodnihMesta(const int bsm);
-    void setPacijena(const Pacijent p1);
+    void setP(const List<Pacijent*> p1);
 
     int getBrojMesta()const;
     int getBrojSlobodnihMesta()const;
-    Pacijent getPacijenta();
+    List<Pacijent*> getP();
     int getPovrsinuSobe() {
          return (sirina * visina);
       }
@@ -477,6 +516,7 @@ class KovidDeo{
 protected:
 
     KovidAmbulanta a;
+    List<Pacijent*> spisak;
     int brojOsobaUpoluIntenzivnoj;
     int brojOsobaUintenzivnoj;
     int brojRespiratora;
@@ -484,18 +524,21 @@ protected:
 public:
 
     KovidDeo();
-    KovidDeo(KovidAmbulanta k,int i, int x,int y);
+    KovidDeo(KovidAmbulanta k,List<Pacijent*> l,int i, int x,int y);
     KovidDeo(KovidDeo&k);
 
     void setBrojOsoba1(const int i);
     void setBrojOsoba2(const int i);
     void setBrojRespiratora(const int i);
     void setKovidAmbulantu(const KovidAmbulanta k);
+    void setSpisak(List<Pacijent*> p);
 
     int getBrojOsoba1()const;
     int getBrojOsoba2()const;
     int getBrojRespiratora()const;
     KovidAmbulanta getKovidAmbulantu();
+    List<Pacijent*> getSpisak();
+
     bool operator/(KovidDeo& b)
 {
         if((b.brojOsobaUintenzivnoj/b.brojRespiratora)!=(this->brojOsobaUintenzivnoj/this->brojRespiratora))
@@ -503,45 +546,8 @@ public:
         else
             return true;
 
-
-
 }
 
-};
-template <class T>
-class List{
-	protected:
-		struct listEl{
-			T content;
-			struct listEl* next;
-		};
-		listEl *head;
-		listEl *tail;
-		int noEl;
-
-	public:
-		List(){
-			head=tail=NULL;
-			noEl=0;
-		}
-
-		List(const List<T>&);
-
-		List<T>& operator=(const List<T>&);
-
-		virtual ~List();
-
-		int size() const { return noEl; }
-
-		bool empty() const { return head == NULL ? 1 : 0; }
-
-		bool add(int, const T&);
-
-		bool remove(int);
-
-		bool read(int, T&)const;
-
-		void clear();
 };
 class Parking{
 
@@ -636,19 +642,19 @@ class BolnickaSoba:public Soba{
 protected:
     int brojLezaja;
     int RastojanjeIzmedjuKreveta;
-    List<Pacijent> spisakPacijenata;
+    List<Pacijent*> spisakPacijenata;
 public:
     BolnickaSoba();
-    BolnickaSoba(int i,int a,List<Pacijent> p);
+    BolnickaSoba(int i,int a,List<Pacijent*> p);
     BolnickaSoba(BolnickaSoba &b);
 
     void setBrojLezaja(int i);
     void setRastojanje(int i);
-    void setSpisakPacijenata(List<Pacijent> s);
+    void setSpisakPacijenata(List<Pacijent*> s);
 
     int getBrojLezaja();
     int getRastojanje();
-    List<Pacijent> getSpisakPacijenata();
+    List<Pacijent*> getSpisakPacijenata();
 
       int getPovrsinuSobe() {
          return (sirina * visina);
