@@ -98,7 +98,7 @@ Osoba o;
 Osoba o1("Marija","Milenkovic","0651234567",datum,zenski);
 Osoba o2(o);
 ///klasa Bolnicka soba
-List<Pacijent*> pa;
+List<Pacijent> pa;
 BolnickaSoba b1;
 BolnickaSoba b2(1,1,pa);
 BolnickaSoba b3(b1);
@@ -165,7 +165,6 @@ i.add(3,3);
 Parking p1;
 Parking p2(i,i,i,1,1);
 Parking p3(p1);
-//p2.ispisParking();
 ///klasa Apoteka
 List<Lek*> lekici;
 Apoteka ap1;
