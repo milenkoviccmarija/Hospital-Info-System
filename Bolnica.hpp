@@ -335,21 +335,21 @@ class List{
 class Mrtvacnica:public Soba{
 
 protected:
-    List<Pacijent> p;
+    List<Pacijent*> p;
     int brojMesta;
     int brojZauzetihMesta;
 public:
     Mrtvacnica();
-    Mrtvacnica(List<Pacijent> p1,int bm,int bsm);
+    Mrtvacnica(List<Pacijent*> p1,int bm,int bsm);
     Mrtvacnica(Mrtvacnica & m);
 
     void setBrojMesta(const int bm);
     void setBrojSlobodnihMesta(const int bsm);
-    void setP(const List<Pacijent> p1);
+    void setP(const List<Pacijent*> p1);
 
     int getBrojMesta()const;
     int getBrojSlobodnihMesta()const;
-    List<Pacijent> getP();
+    List<Pacijent*> getP();
     int getPovrsinuSobe() {
          return (sirina * visina);
       }
@@ -592,7 +592,7 @@ public:
     virtual double izvracunajVrednostArtikla()const=0;
 };
 class Lek:public Artikal {
-public:
+protected:
     int jkl;
     string naziv;
     double jedinicnaCena;
@@ -642,19 +642,19 @@ class BolnickaSoba:public Soba{
 protected:
     int brojLezaja;
     int RastojanjeIzmedjuKreveta;
-    List<Pacijent> spisakPacijenata;
+    List<Pacijent*> spisakPacijenata;
 public:
     BolnickaSoba();
-    BolnickaSoba(int i,int a,List<Pacijent> p);
+    BolnickaSoba(int i,int a,List<Pacijent*> p);
     BolnickaSoba(BolnickaSoba &b);
 
     void setBrojLezaja(int i);
     void setRastojanje(int i);
-    void setSpisakPacijenata(List<Pacijent> s);
+    void setSpisakPacijenata(List<Pacijent*> s);
 
     int getBrojLezaja();
     int getRastojanje();
-    List<Pacijent> getSpisakPacijenata();
+    List<Pacijent*> getSpisakPacijenata();
 
       int getPovrsinuSobe() {
          return (sirina * visina);

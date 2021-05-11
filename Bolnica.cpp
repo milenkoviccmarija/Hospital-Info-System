@@ -413,7 +413,7 @@ else
 BolnickaSoba::BolnickaSoba():spisakPacijenata(){
 brojLezaja=5;
 }
-BolnickaSoba::BolnickaSoba(int i,int a,List<Pacijent> p):RastojanjeIzmedjuKreveta(a),spisakPacijenata(p){
+BolnickaSoba::BolnickaSoba(int i,int a,List<Pacijent*> p):RastojanjeIzmedjuKreveta(a),spisakPacijenata(p){
 brojLezaja=i;
 }
 BolnickaSoba::BolnickaSoba(BolnickaSoba &b):spisakPacijenata(b.spisakPacijenata){
@@ -432,7 +432,7 @@ else
     cout<<"Nije uneta validna vrednost!"<<endl;
 
 }
-void BolnickaSoba::setSpisakPacijenata(List<Pacijent> s){
+void BolnickaSoba::setSpisakPacijenata(List<Pacijent*> s){
 spisakPacijenata=s;
 }
 int BolnickaSoba::getBrojLezaja(){
@@ -441,7 +441,7 @@ return brojLezaja;
 int BolnickaSoba::getRastojanje(){
 return RastojanjeIzmedjuKreveta;
 }
-List<Pacijent> BolnickaSoba::getSpisakPacijenata(){
+List<Pacijent*> BolnickaSoba::getSpisakPacijenata(){
 return spisakPacijenata;
 }
 
@@ -1097,7 +1097,7 @@ Mrtvacnica::Mrtvacnica():p(){
     brojZauzetihMesta=40;
 
 }
-Mrtvacnica::Mrtvacnica(List<Pacijent> p1,int bm,int bsm):p(p1){
+Mrtvacnica::Mrtvacnica(List<Pacijent*> p1,int bm,int bsm):p(p1){
     brojMesta=bm;
     brojZauzetihMesta=bsm;
 
@@ -1119,7 +1119,7 @@ brojZauzetihMesta=bsm;
 else
     cout<<"Nije uneta validna vrednost!"<<endl;
 }
-void Mrtvacnica::setP(const List<Pacijent> p1){
+void Mrtvacnica::setP(const List<Pacijent*> p1){
 p=p1;
 }
 int Mrtvacnica::getBrojMesta()const{
@@ -1128,7 +1128,7 @@ return brojMesta;
 int Mrtvacnica::getBrojSlobodnihMesta()const{
 return brojZauzetihMesta;
 }
-List<Pacijent> Mrtvacnica::getP(){
+List<Pacijent*> Mrtvacnica::getP(){
 return p;
 }
 

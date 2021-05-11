@@ -98,7 +98,7 @@ Osoba o;
 Osoba o1("Marija","Milenkovic","0651234567",datum,zenski);
 Osoba o2(o);
 ///klasa Bolnicka soba
-List<Pacijent> pa;
+List<Pacijent*> pa;
 BolnickaSoba b1;
 BolnickaSoba b2(1,1,pa);
 BolnickaSoba b3(b1);
@@ -171,8 +171,11 @@ Apoteka ap1;
 Apoteka ap2(lekici,o,s);
 Apoteka ap3(ap1);
 ///operatori za najcesce aktivnosti
+cout<<datum;
 datum++;
+cout<<datum;
 datum--;
+cout<<datum;
 bool nn=(bb==bb2);
 oo2=oo+oo1;
 bool boo=kd/kd1;
