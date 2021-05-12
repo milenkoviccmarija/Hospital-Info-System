@@ -108,7 +108,6 @@ BolnickiToalet t2(1);
 BolnickiToalet t3(t1);
 ///klasa Bolnica
 Bolnica bb;
-Bolnica bb1("bb","bb","bb",1,1,paviljonski,opsta);
 Bolnica bb2(bb);
 ///klasa Pacijent
 Pacijent pp;
@@ -242,7 +241,7 @@ case 0:
 break;
     }
 case 1:
-    b.ispis();
+    cout<<b;
     break;
 case 2:
     {

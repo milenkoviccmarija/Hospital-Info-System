@@ -77,8 +77,6 @@ istream &operator>>(istream& input, Osoba &o){
 
 ostream &operator<<(ostream& output, const Bolnica &b){
 
-
-
         output<<"Ime bolnice:"<<b.ime;
         output<<"Lokacija:"<<b.lokacija;
         output<<"Kontakt:"<<b.kontakt;
@@ -119,7 +117,82 @@ ostream &operator<<(ostream& output, const Bolnica &b){
             break;
     }
         output<<"Tip bolnice:"<<tempp;
-
+         if(b.spisakPacijenata.size() == 0) {
+            output << endl << "Nema pacijenata." << endl;
+        } else {
+            Pacijent* o;
+            output << endl << "Pacijent:" << endl;
+            for (int i = 1; i <= b.spisakPacijenata.size(); i++){
+                b.spisakPacijenata.read(i, o);
+                output<<o;
+            }
+            }
+             if(b.spisakDoktora.size() == 0) {
+            output<< endl << "Nema doktora." << endl;
+        } else {
+            Doktor* o;
+            output<< endl << "Doktori:" << endl;
+            for (int i = 1; i <= b.spisakDoktora.size(); i++){
+                b.spisakDoktora.read(i, o);
+                output<<o;
+            }
+}
+ if(b.spisakSestri.size() == 0) {
+            output<< endl << "Nema sestara." << endl;
+        } else {
+            Sestra* o;
+             output<< endl << "Sestre:" << endl;
+            for (int i = 1; i <= b.spisakSestri.size(); i++){
+                b.spisakSestri.read(i, o);
+                output<<o;
+            }
+}
+output<<b.prijemana_ambulanta<<endl;
+output<<b.mrtvacnica<<endl;
+ if(b.osoblje.size() == 0) {
+            output << endl << "Nema tehnickog osoblja." << endl;
+        } else {
+            TehnickoOsoblje* o;
+            output<< endl << "Tehnicko osoblje:" << endl;
+            for (int i = 1; i <= b.osoblje.size(); i++){
+                b.osoblje.read(i, o);
+                output<<o;
+            }
+}
+output<<b.hitna<<endl;
+ if(b.Laboranti.size() == 0) {
+            output << endl << "Nema laboranata." << endl;
+        } else {
+            Laborant* o;
+            output << endl << "Laborant:" << endl;
+            for (int i = 1; i <= b.Laboranti.size(); i++){
+                b.Laboranti.read(i, o);
+                output<<o;
+            }
+}
+output<<b.lab<<endl;
+output<<b.ka<<endl;
+output<<b.apoteka<<endl;
+if(b.sobe.size() == 0) {
+            output << endl << "Nema soba." << endl;
+        } else {
+            BolnickaSoba* o;
+            output << endl << "Sobe:" << endl;
+            for (int i = 1; i <= b.sobe.size(); i++){
+                b.sobe.read(i, o);
+                output<<o;
+            }
+}
+if(b.toaleti.size() == 0) {
+            output<< endl << "Nema toaleta." << endl;
+        } else {
+            BolnickiToalet* o;
+            output << endl << "Toaleti:" << endl;
+            for (int i = 1; i <= b.toaleti.size(); i++){
+                b.toaleti.read(i, o);
+                output<<o;
+            }
+}
 return output;
 
 }
@@ -507,7 +580,7 @@ int BolnickiToalet::getBrojInvalidskihPrinceza(){
 return brojInvalidskihPrinceza;
 }
 
-Bolnica::Bolnica(){
+Bolnica::Bolnica():spisakPacijenata(),spisakDoktora(),spisakSestri(),prijemana_ambulanta(),mrtvacnica(),osoblje(),snabdevanjeKrvlju(),hitna(),Laboranti(),lab(),ka(),kdeo(),apoteka(),sobe(){
 
 ime="Bolnica";
 lokacija="Zlatne Grede 4";
@@ -517,8 +590,23 @@ brojZautetihKreveta=250;
 gradnja=blok;
 tip=opsta;
 
+
 }
-Bolnica::Bolnica(string imeb, string l, string konb, int bk,int bzk,NacinGradnje n,TipBolnice t){
+Bolnica::Bolnica(string imeb, string l, string konb, int bk,int bzk,NacinGradnje n,TipBolnice t,List<Pacijent*> spisakPacijenataa,
+    List<Doktor*> spisakDoktoraa,
+    List<Sestra*> spisakSestrii,
+    PrijemnaAmbulanta prijemana_ambulantaa,
+    Mrtvacnica* mrtvacnicaa,
+    List<TehnickoOsoblje*> osobljee,
+    OdeljenjeZaSnabdevanjeKrvlju snabdevanjeKrvljuu,
+    Hitna hitnaa,
+    List<Laborant*> Laborantii,
+    Laboratorija labb,
+    KovidAmbulanta kaa,
+    KovidDeo kdeoo,
+    Apoteka apotekaa,
+    List<BolnickaSoba*> sobee,
+    List<BolnickiToalet*> toaletii){
 
     ime=imeb;
     lokacija=l;
@@ -527,6 +615,21 @@ Bolnica::Bolnica(string imeb, string l, string konb, int bk,int bzk,NacinGradnje
     brojZautetihKreveta=bzk;
     gradnja=n;
     tip=t;
+    spisakPacijenata=spisakPacijenataa;
+    spisakDoktora=spisakDoktoraa;
+    spisakSestri=spisakSestrii;
+    prijemana_ambulanta=prijemana_ambulantaa;
+    mrtvacnica=mrtvacnicaa;
+    osoblje=osobljee;
+    snabdevanjeKrvlju=snabdevanjeKrvljuu;
+    hitna=hitnaa;
+    Laboranti=Laborantii;
+    lab=labb;
+    ka=kaa;
+    kdeo=kdeoo;
+    apoteka=apotekaa;
+    sobe=sobee;
+    toaleti=toaletii;
 
 }
 Bolnica::Bolnica(const Bolnica& b){
@@ -538,6 +641,21 @@ Bolnica::Bolnica(const Bolnica& b){
     brojZautetihKreveta=b.brojZautetihKreveta;
     gradnja=b.gradnja;
     tip=b.tip;
+    spisakPacijenata=b.spisakPacijenata;
+    spisakDoktora=b.spisakDoktora;
+    spisakSestri=b.spisakSestri;
+    prijemana_ambulanta=b.prijemana_ambulanta;
+    mrtvacnica=b.mrtvacnica;
+    osoblje=b.osoblje;
+    snabdevanjeKrvlju=b.snabdevanjeKrvlju;
+    hitna=b.hitna;
+    Laboranti=b.Laboranti;
+    lab=b.lab;
+    ka=b.ka;
+    kdeo=b.kdeo;
+    apoteka=b.apoteka;
+    sobe=b.sobe;
+    toaleti=b.toaleti;
 }
 string Bolnica::getImeBolnice()const{
         return ime;
@@ -595,6 +713,51 @@ string Bolnica::getTipBolnice()const{
 
     return temp;
     }
+List<Pacijent*> Bolnica::getspisakPacijenata(){
+return spisakPacijenata;
+}
+List<Doktor*> Bolnica::getspisakDoktoraa(){
+return spisakDoktora;
+}
+List<Sestra*> Bolnica::getspisakSestri(){
+return spisakSestri;
+}
+PrijemnaAmbulanta Bolnica::getprijemana_ambulanta(){
+return prijemana_ambulanta;
+}
+Mrtvacnica* Bolnica::getmrtvacnica(){
+return mrtvacnica;
+}
+List<TehnickoOsoblje*> Bolnica::getosoblje(){
+return osoblje;
+}
+OdeljenjeZaSnabdevanjeKrvlju Bolnica::getsnabdevanjeKrvlju(){
+return snabdevanjeKrvlju;
+}
+Hitna Bolnica::gethitna(){
+return hitna;
+}
+List<Laborant*> Bolnica::getLaboranti(){
+return Laboranti;
+}
+Laboratorija Bolnica::getlab(){
+return lab;
+}
+KovidAmbulanta Bolnica::getka(){
+return ka;
+}
+KovidDeo Bolnica::getkdeo(){
+return kdeo;
+}
+Apoteka Bolnica::getapoteka(){
+return apoteka;
+}
+List<BolnickaSoba*> Bolnica::getsobe(){
+return sobe;
+}
+List<BolnickiToalet*> Bolnica::gettoaleti(){
+return toaleti;
+}
 void Bolnica::setImeBolnice(const string s){
         ime=s;
     }
@@ -622,52 +785,51 @@ void Bolnica::setNacinGradnje(const NacinGradnje i){
 void Bolnica::setTipBolnice(const TipBolnice i){
         tip=i;
     }
-void Bolnica::ispis(){
-        cout<<"***************************\n";
-        cout<<"Ime bolnice:"<<ime<<endl;
-        cout<<"Lokacija:"<<lokacija<<endl;
-        cout<<"Kontakt:"<<kontakt<<endl;
-        cout<<"Broj kreveta:"<<brojKreveta<<endl;
-        cout<<"Broj zauzetih kreveta:"<<brojZautetihKreveta<<endl;
-        string temp;
-    switch(gradnja){
-        case paviljonski:
-            temp = "paviljonski";
-            break;
-        case koridorni:
-            temp = "koridorni";
-            break;
-        case blok:
-            temp = "blok";
-            break;
-        case sistemBaraka:
-            temp = "sistem baraka";
-            break;
-        case tranbantni:
-            temp = "tranbantni";
-            break;
-        default:
-            temp = "nedefinisan";
-            break;
-    }
-        cout<<"Nacin gradnje:"<<temp<<endl;
-         string tempp;
-    switch(tip){
-        case opsta:
-            tempp = "opsta";
-            break;
-        case koridorni:
-            tempp = "specificna";
-            break;
-        default:
-            tempp = "nedefinisan";
-            break;
-    }
-        cout<<"Tip bolnice:"<<tempp<<endl;
-        cout<<"***************************\n";
-
-
-    }
+void Bolnica::setspisakPacijenata(List<Pacijent*>i){
+spisakPacijenata=i;
+}
+void Bolnica::setspisakDoktora(List<Doktor*>i){
+spisakDoktora=i;
+}
+void Bolnica::setspisakSestri(List<Sestra*>i){
+spisakSestri=i;
+}
+void Bolnica::setprijemana_ambulanta(PrijemnaAmbulanta i){
+prijemana_ambulanta=i;
+}
+void Bolnica::setmrtvacnica(Mrtvacnica* i){
+mrtvacnica=i;
+}
+void Bolnica::setosoblje(List<TehnickoOsoblje*> i){
+osoblje=i;
+}
+void Bolnica::setsnabdevanjeKrvlju(OdeljenjeZaSnabdevanjeKrvlju i){
+snabdevanjeKrvlju=i;
+}
+void Bolnica::sethitna(Hitna i){
+hitna=i;
+}
+void Bolnica::setLaboranti(List<Laborant*> i){
+Laboranti=i;
+}
+void Bolnica::setlab(Laboratorija i){
+lab=i;
+}
+void Bolnica::setka(KovidAmbulanta i){
+ka=i;
+}
+void Bolnica::setkdeo(KovidDeo i ){
+kdeo=i;
+}
+void Bolnica::setapoteka(Apoteka i){
+apoteka=i;
+}
+void Bolnica::setsobe(List<BolnickaSoba*> i){
+sobe=i;
+}
+void Bolnica::settoaleti(List<BolnickiToalet*> i){
+toaleti=i;
+}
 
 Osoba::Osoba():datumRodjenja(4,11,2021){
 
@@ -1131,6 +1293,22 @@ return brojZauzetihMesta;
 List<Pacijent*> Mrtvacnica::getP(){
 return p;
 }
+ostream &operator<<(ostream& out, const Mrtvacnica &b){
+out<<"Pacijenti:"<<endl;
+if(b.p.size() == 0) {
+            out<< endl << "Nema pacijenata." << endl;
+        } else {
+            Pacijent* o;
+            out << endl << "Pacijent:" << endl;
+            for (int i = 1; i <= b.p.size(); i++){
+                b.p.read(i, o);
+                out<<o;
+            }
+            }
+out<<"Broj mesta:"<<b.brojMesta<<endl;
+out<<"Broj zauzetih mesta:"<<b.brojZauzetihMesta<<endl;
+return out;
+}
 
 TehnickoOsoblje::TehnickoOsoblje(){
 
@@ -1244,7 +1422,11 @@ int OdeljenjeZaSnabdevanjeKrvlju::getKrv7()const{return brojon;}
 Osoba OdeljenjeZaSnabdevanjeKrvlju::getOsoba(){
 return o;
 }
-
+ostream& operator<<(ostream&out,OdeljenjeZaSnabdevanjeKrvlju& o){
+out<<o.brojABn<<o.brojABp<<o.brojAn<<o.brojAp<<o.brojBn<<o.brojBp<<o.brojon<<o.brojop<<endl;
+out<<o.o;
+return out;
+}
 
 PrijemnaAmbulanta::PrijemnaAmbulanta():d(),s(),p(){
     vitalniZnaci=true;
@@ -1300,7 +1482,23 @@ return s;
 Pacijent PrijemnaAmbulanta::getPacijenta(){
 return p;
 }
-
+ostream &operator<<(ostream& out, const PrijemnaAmbulanta &b){
+out<<b.d;
+out<<b.s;
+out<<b.p;
+switch(b.vitalniZnaci){
+case true:
+    out<<"Ima vitalnih znaka"<<endl;
+    break;
+case false:
+    out<<"Nema vitalnih znakova"<<endl;
+    break;
+default:
+    out<<"Nedefinisano"<<endl;
+}
+out<<"Broj mesta u cekaonici:"<<b.mestaUcekaonici<<endl;
+return out;
+}
 
 Hitna::Hitna():d(),s(),brojVozila(20),brojKreveta(30){}
 Hitna::Hitna(Doktor d1,Sestra s1,int bv,int bk):d(d1),s(s1),brojVozila(bv),brojKreveta(bk){}
@@ -1328,6 +1526,13 @@ return d;
 }
 Sestra Hitna::getSestru(){
 return s;
+}
+ostream &operator<<(ostream&out, const Hitna &b){
+out<<"Doktor:"<<b.d;
+out<<"Sestra:"<<b.s;
+out<<"Broj kreveta:"<<b.brojKreveta;
+out<<"Broj vozila:"<<b.brojVozila;
+return out;
 }
 
 Laborant::Laborant(){
@@ -1405,6 +1610,13 @@ return brojNezavrsenihNalaza;
 Laborant Laboratorija::getLaboranta(){
 return l;
 }
+ostream &operator<<(ostream&out, const Laboratorija &b){
+out<<b.l;
+out<<"stanje nalaza:"<<b.stanjen<<endl;
+out<<"id nalaza:"<<b.idNalaza<<endl;
+out<<"broj nezavrsenih nalaza:"<<b.brojNezavrsenihNalaza<<endl;
+return out;
+}
 
 KovidAmbulanta::KovidAmbulanta():s(),p(){
 zastita=true;
@@ -1477,7 +1689,14 @@ return s;
 Pacijent KovidAmbulanta::getPacijent(){
 return p;
 }
-
+ostream &operator<<(ostream&out, const KovidAmbulanta &b){
+out<<b.s<<endl;
+out<<b.p<<endl;
+out<<"zastita:"<<b.zastita<<endl;
+out<<"tip testa:"<<b.tipTesta<<endl;
+out<<"broj novozarazenih:"<<b.brojNovoZarazenih<<endl;
+return out;
+}
 
 template <class T>
 ostream& operator<<(ostream& out, const List<T>& rl) {
@@ -1791,6 +2010,23 @@ ispisSpisakLekova();
 cout<<sestra;
 cout<<apotekar;
 }
+ostream &operator<<(ostream&out, const Apoteka &b){
+out<<b.apotekar<<endl;;
+out<<b.sestra<<endl;
+if(b.spisakLekova.size() == 0) {
+            out << endl << "Nema lekova." << endl;
+        } else {
+            Lek* o;
+            out << endl << "Spisak lekova:" << endl;
+            for (int i = 1; i <= b.spisakLekova.size(); i++){
+                b.spisakLekova.read(i, o);
+                out<<o;
+            }
+}
+
+
+return out;
+}
 
 KovidDeo::KovidDeo():a(),spisak(){
 brojOsobaUintenzivnoj=50;
@@ -1836,4 +2072,21 @@ a=k;
 }
 KovidAmbulanta KovidDeo::getKovidAmbulantu(){
 return a;
+}
+ostream &operator<<(ostream&out, const KovidDeo &b){
+out<<b.a<<endl;
+if(b.spisak.size() == 0) {
+            out << endl << "Nema pacijenata." << endl;
+        } else {
+            Pacijent* o;
+            out << endl << "Pacijenti:" << endl;
+            for (int i = 1; i <= b.spisak.size(); i++){
+                b.spisak.read(i, o);
+                out<<o;
+            }
+            }
+out<<"Broj respiratora:"<<b.brojRespiratora<<endl;
+out<<"Broj osoba na intenzivnoj:"<<b.brojOsobaUintenzivnoj<<endl;
+out<<"Broj osoba na poli intenzivnoj:"<<b.brojOsobaUpoluIntenzivnoj<<endl;
+return out;
 }

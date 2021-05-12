@@ -116,50 +116,6 @@ Datum operator--(int ){
       }
 
 };
-class Bolnica{
-
-public:
-
-    string ime;
-    string lokacija;
-    string kontakt;
-    int brojKreveta;
-    int brojZautetihKreveta;
-    NacinGradnje gradnja;
-    TipBolnice tip;
-
-public:
-
-    Bolnica();
-	Bolnica(string imeb, string l, string konb, int bk,int bzk,NacinGradnje n,TipBolnice t);
-	Bolnica(const Bolnica& b);
-
-    string getImeBolnice()const;
-    string getKontaktBolnice()const;
-    string getLokacija()const;
-    int getBrojKreveta()const;
-    int getBrojZauzetihKreveta()const;
-    string getNacinGradnje()const;
-    string getTipBolnice()const;
-
-    void setImeBolnice(const string s);
-    void setLokacijaBolnice(const string s);
-    void setKontaktBolnice(const string s);
-    void setBrojKreveta( const int i);
-    void setBrojZauzetihKreveta(const int i);
-    void setNacinGradnje(const NacinGradnje i);
-    void setTipBolnice(const TipBolnice i);
-
-    void ispis();
-    friend ostream &operator<<(ostream&, const Bolnica &b);
-    friend istream &operator>>(istream&, Bolnica &b);
-    bool operator==(Bolnica& b)
-{
-return (getTipBolnice() ==b.getTipBolnice()&& getNacinGradnje() == b.getNacinGradnje() && getBrojKreveta() == b.getBrojKreveta() && getBrojZauzetihKreveta() == b.getBrojZauzetihKreveta());
-
-}
-
-};
 class Osoba{
 
 public:
@@ -295,6 +251,7 @@ public:
     Doktor getDoktora();
     Sestra getSestru();
     Pacijent getPacijenta();
+    friend ostream &operator<<(ostream&, const PrijemnaAmbulanta &b);
 
 };
 template <class T>
@@ -353,6 +310,7 @@ public:
     int getPovrsinuSobe() {
          return (sirina * visina);
       }
+      friend ostream &operator<<(ostream&, const Mrtvacnica &b);
 
 
 };
@@ -423,6 +381,7 @@ OdeljenjeZaSnabdevanjeKrvlju operator+(const OdeljenjeZaSnabdevanjeKrvlju& b) {
       o.brojon = this->brojon + b.brojon;
       return o;
    }
+friend ostream& operator<<(ostream&,OdeljenjeZaSnabdevanjeKrvlju& o);
 };
 class Hitna{
 
@@ -445,6 +404,7 @@ public:
     int getBrojKreveta()const;
     Doktor getDoktora();
     Sestra getSestru();
+    friend ostream &operator<<(ostream&, const Hitna &b);
 
 };
 class Laborant:public Osoba{
@@ -481,7 +441,7 @@ public:
     int getIdNalaza()const;
     int getBrojNezavrsenihNalaza()const;
     Laborant getLaboranta();
-
+    friend ostream &operator<<(ostream&, const Laboratorija &b);
 
 
 };
@@ -509,11 +469,11 @@ public:
     int getBrojNovozarazenih()const;
     Sestra getSestru();
     Pacijent getPacijent();
-
+friend ostream &operator<<(ostream&, const KovidAmbulanta &b);
 };
 class KovidDeo{
 
-protected:
+public:
 
     KovidAmbulanta a;
     List<Pacijent*> spisak;
@@ -547,7 +507,7 @@ public:
             return true;
 
 }
-
+friend ostream &operator<<(ostream&, const KovidAmbulanta &b);
 };
 class Parking{
 
@@ -636,6 +596,7 @@ public:
 
     void ispisSpisakLekova();
     void ispisApoteke();
+    friend ostream &operator<<(ostream&, const Apoteka &b);
 
 };
 class BolnickaSoba:public Soba{
@@ -663,6 +624,107 @@ public:
       int m=getPovrsinuSobe();
       return m/RastojanjeIzmedjuKreveta;
       }
+
+};
+class Bolnica{
+
+public:
+
+    string ime;
+    string lokacija;
+    string kontakt;
+    int brojKreveta;
+    int brojZautetihKreveta;
+    NacinGradnje gradnja;
+    TipBolnice tip;
+    List<Pacijent*> spisakPacijenata;
+    List<Doktor*> spisakDoktora;
+    List<Sestra*> spisakSestri;
+    PrijemnaAmbulanta prijemana_ambulanta;
+    Mrtvacnica* mrtvacnica;
+    List<TehnickoOsoblje*> osoblje;
+    OdeljenjeZaSnabdevanjeKrvlju snabdevanjeKrvlju;
+    Hitna hitna;
+    List<Laborant*> Laboranti;
+    Laboratorija lab;
+    KovidAmbulanta ka;
+    KovidDeo kdeo;
+    Apoteka apoteka;
+    List<BolnickaSoba*> sobe;
+    List<BolnickiToalet*> toaleti;
+public:
+
+    Bolnica();
+	Bolnica(string imeb, string l, string konb, int bk,int bzk,NacinGradnje n,TipBolnice t,List<Pacijent*> spisakPacijenataa,
+    List<Doktor*> spisakDoktoraa,
+    List<Sestra*> spisakSestrii,
+    PrijemnaAmbulanta prijemana_ambulantaa,
+    Mrtvacnica* mrtvacnicaa,
+    List<TehnickoOsoblje*> osobljee,
+    OdeljenjeZaSnabdevanjeKrvlju snabdevanjeKrvljuu,
+    Hitna hitnaa,
+    List<Laborant*> Laborantii,
+    Laboratorija labb,
+    KovidAmbulanta kaa,
+    KovidDeo kdeoo,
+    Apoteka apotekaa,
+    List<BolnickaSoba*> sobee,
+    List<BolnickiToalet*> toaletii);
+	Bolnica(const Bolnica& b);
+
+    string getImeBolnice()const;
+    string getKontaktBolnice()const;
+    string getLokacija()const;
+    int getBrojKreveta()const;
+    int getBrojZauzetihKreveta()const;
+    string getNacinGradnje()const;
+    string getTipBolnice()const;
+    List<Pacijent*> getspisakPacijenata();
+    List<Doktor*> getspisakDoktoraa();
+    List<Sestra*> getspisakSestri();
+    PrijemnaAmbulanta getprijemana_ambulanta();
+    Mrtvacnica* getmrtvacnica();
+    List<TehnickoOsoblje*> getosoblje();
+    OdeljenjeZaSnabdevanjeKrvlju getsnabdevanjeKrvlju();
+    Hitna gethitna();
+    List<Laborant*> getLaboranti();
+    Laboratorija getlab();
+    KovidAmbulanta getka();
+    KovidDeo getkdeo();
+    Apoteka getapoteka();
+    List<BolnickaSoba*> getsobe();
+    List<BolnickiToalet*> gettoaleti();
+
+    void setImeBolnice(const string s);
+    void setLokacijaBolnice(const string s);
+    void setKontaktBolnice(const string s);
+    void setBrojKreveta( const int i);
+    void setBrojZauzetihKreveta(const int i);
+    void setNacinGradnje(const NacinGradnje i);
+    void setTipBolnice(const TipBolnice i);
+    void setspisakPacijenata(List<Pacijent*>i);
+    void setspisakDoktora(List<Doktor*>i);
+    void setspisakSestri(List<Sestra*>i);
+    void setprijemana_ambulanta(PrijemnaAmbulanta i);
+    void setmrtvacnica(Mrtvacnica* i);
+    void setosoblje(List<TehnickoOsoblje*> i);
+    void setsnabdevanjeKrvlju(OdeljenjeZaSnabdevanjeKrvlju i);
+    void sethitna(Hitna i);
+    void setLaboranti(List<Laborant*> i);
+    void setlab(Laboratorija i);
+    void setka(KovidAmbulanta i);
+    void setkdeo(KovidDeo i );
+    void setapoteka(Apoteka i);
+    void setsobe(List<BolnickaSoba*> i);
+    void settoaleti(List<BolnickiToalet*> i);
+
+    friend ostream &operator<<(ostream&, const Bolnica &b);
+    friend istream &operator>>(istream&, Bolnica &b);
+    bool operator==(Bolnica& b)
+{
+return (getTipBolnice() ==b.getTipBolnice()&& getNacinGradnje() == b.getNacinGradnje() && getBrojKreveta() == b.getBrojKreveta() && getBrojZauzetihKreveta() == b.getBrojZauzetihKreveta());
+
+}
 
 };
 #endif // BOLNICA_HPP_INCLUDED
