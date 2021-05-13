@@ -572,7 +572,9 @@ public:
     double getJedinicnaCena();
     int getKolicina();
 
-    double izvracunajVrednostArtikla();
+    double izvracunajVrednostArtikla(){
+    return ((double)kolicina) * jedinicnaCena;
+    }
     friend ostream& operator<<(ostream& out, const Lek& l);
 };
 class Apoteka{

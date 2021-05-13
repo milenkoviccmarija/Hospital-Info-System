@@ -78,7 +78,6 @@ int meni3(){
 }
 int main()
 {
-
 cout<<"\n\t\t*******************************************************************************************\n";
 cout<<"\t\t**                                                                                       **\n";
 cout<<"\t\t**                                            		                                 **\n";
@@ -92,10 +91,10 @@ cout<<"\t\t**                                                                   
 cout<<"\t\t*******************************************************************************************\n\n\n\n";
 
 ///klasa datum
-Datum datum(1,2,2005);
+Datum datum(6,21,2003);
 ///klasa Osoba
 Osoba o;
-Osoba o1("Marija","Milenkovic","0651234567",datum,zenski);
+Osoba o1("Danijela","Milenkovic","0651234567",datum,zenski);
 Osoba o2(o);
 ///klasa Bolnicka soba
 List<Pacijent*> pa;

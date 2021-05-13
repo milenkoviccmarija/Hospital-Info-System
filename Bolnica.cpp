@@ -484,12 +484,14 @@ else
 }
 
 BolnickaSoba::BolnickaSoba():spisakPacijenata(){
+RastojanjeIzmedjuKreveta=1;
 brojLezaja=5;
 }
 BolnickaSoba::BolnickaSoba(int i,int a,List<Pacijent*> p):RastojanjeIzmedjuKreveta(a),spisakPacijenata(p){
 brojLezaja=i;
 }
 BolnickaSoba::BolnickaSoba(BolnickaSoba &b):spisakPacijenata(b.spisakPacijenata){
+RastojanjeIzmedjuKreveta=b.RastojanjeIzmedjuKreveta;
 brojLezaja=b.brojLezaja;
 }
 void BolnickaSoba::setBrojLezaja(int i){
@@ -561,6 +563,7 @@ return sirina;
 int Toalet::getVisina(){
 return visina;
 }
+
 BolnickiToalet::BolnickiToalet(){
 brojInvalidskihPrinceza=1;
 }
@@ -831,7 +834,7 @@ void Bolnica::settoaleti(List<BolnickiToalet*> i){
 toaleti=i;
 }
 
-Osoba::Osoba():datumRodjenja(4,11,2021){
+Osoba::Osoba():datumRodjenja(1,2,2005){
 
     ime="Marija";
     prezime="Milenkovic";
@@ -931,7 +934,7 @@ void Osoba::ispisOsobe(){
 
     }
 
-Pacijent::Pacijent():datumPrijema(1,2,3){
+Pacijent::Pacijent():datumPrijema(1,2,2005){
     Osoba:Osoba();
     uput=true;
     id=1;
@@ -1079,7 +1082,6 @@ default:
         cout<<"ID pacijenta:"<<id<<endl;
 
 }
-
 
 Doktor::Doktor(){
 
@@ -1923,8 +1925,8 @@ cout<<"Naplata:"<<naplata<<endl;
 Lek::Lek(){
     jkl=10000000;
     naziv="aspirin";
-    jedinicnaCena=200;
-    kolicina=200;
+    jedinicnaCena=200.99;
+    kolicina=2;
     }
 Lek::Lek(int j,string n,double c, int k):naziv(n){
     jkl=j;
@@ -1961,9 +1963,6 @@ jedinicnaCena=cena;
 void Lek::setKolicina(int i){
 kolicina=i;
 }
-double Lek::izvracunajVrednostArtikla(){
-    kolicina*jedinicnaCena;
-    }
 ostream& operator<<(ostream& out, const Lek& l) {
     out<<l.jkl<<endl;
     out << l.naziv;
